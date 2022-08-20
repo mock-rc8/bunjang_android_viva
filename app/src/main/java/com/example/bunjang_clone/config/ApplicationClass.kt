@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 // 앱이 실행될때 1번만 실행이 됩니다.
 class ApplicationClass : Application() {
-    val API_URL = ""
+//    val API_URL = ""
 
     // 코틀린의 전역변수 문법
     companion object {
@@ -30,26 +30,26 @@ class ApplicationClass : Application() {
         sSharedPreferences = applicationContext.getSharedPreferences("Bunjang", MODE_PRIVATE)
 
         // 레트로핏 인스턴스 생성
-        initRetrofitInstance()
+//        initRetrofitInstance()
     }
 
     // 레트로핏 인스턴스를 생성하고, 레트로핏에 각종 설정값들을 지정해줍니다.
     // 연결 타임아웃시간은 5초로 지정이 되어있고, HttpLoggingInterceptor를 붙여서 어떤 요청이 나가고 들어오는지를 보여줍니다.
-    private fun initRetrofitInstance() {
-        val client: OkHttpClient = OkHttpClient.Builder()
-            .readTimeout(5000, TimeUnit.MILLISECONDS)
-            .connectTimeout(5000, TimeUnit.MILLISECONDS)
-            // 로그캣에 okhttp.OkHttpClient로 검색하면 http 통신 내용을 보여줍니다.
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .addNetworkInterceptor(XAccessTokenInterceptor())
-            .build()
-
-        // sRetrofit 이라는 전역변수에 API url, 인터셉터, Gson을 넣어주고 빌드해주는 코드
-        // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
-        sRetrofit = Retrofit.Builder()
-            .baseUrl(API_URL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+//    private fun initRetrofitInstance() {
+//        val client: OkHttpClient = OkHttpClient.Builder()
+//            .readTimeout(5000, TimeUnit.MILLISECONDS)
+//            .connectTimeout(5000, TimeUnit.MILLISECONDS)
+//            // 로그캣에 okhttp.OkHttpClient로 검색하면 http 통신 내용을 보여줍니다.
+//            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+//            .addNetworkInterceptor(XAccessTokenInterceptor())
+//            .build()
+//
+//        // sRetrofit 이라는 전역변수에 API url, 인터셉터, Gson을 넣어주고 빌드해주는 코드
+//        // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
+//        sRetrofit = Retrofit.Builder()
+//            .baseUrl(API_URL)
+//            .client(client)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//    }
 }

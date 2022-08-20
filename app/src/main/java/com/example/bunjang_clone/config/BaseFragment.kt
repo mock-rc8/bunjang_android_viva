@@ -12,7 +12,7 @@ import androidx.viewbinding.ViewBinding
 import com.example.bunjang_clone.util.LoadingDialog
 
 // Fragment의 기본을 작성, 뷰 바인딩 활용
-class BaseFragment<B: ViewBinding>(private val bind:(View) -> B, @LayoutRes layoutResId: Int) : Fragment(layoutResId) {
+abstract class BaseFragment<B: ViewBinding>(private val bind:(View) -> B, @LayoutRes layoutResId: Int) : Fragment(layoutResId) {
 
     private var _binding: B? = null
 
