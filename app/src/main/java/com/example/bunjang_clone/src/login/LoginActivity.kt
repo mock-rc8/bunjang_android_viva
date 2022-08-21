@@ -1,5 +1,6 @@
 package com.example.bunjang_clone.src.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -7,7 +8,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityLoginBinding
+import com.example.bunjang_clone.src.MainActivity
 import com.example.bunjang_clone.src.login.models.ViewPagerAd
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
 
@@ -24,6 +27,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         // 로그인 광고 viewpager2 구현
         setView()
 
+        bottomSheet()
+
         // 뷰페이저 처음으로 옴기기
         handler = Handler(Looper.getMainLooper()){
             setPage()
@@ -32,6 +37,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         // 뷰페이저 자동 스레드
         var thread = Thread(PagerRunnable())
         thread.start()
+
+        binding.ivLoginKakao.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
 
     }
     fun setPage() {
@@ -64,6 +73,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 Thread.sleep(5000)
                 handler.sendEmptyMessage(0)
             }
+        }
+    }
+    fun bottomSheet(){
+        val bottomSheet = layoutInflater.inflate(R.layout.fragment_login_other_sheet, null)
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(bottomSheet)
+
+        binding.tvLoginOther.setOnClickListener {
+            val bottomDialogFragment = OtherLoginBottomDialog()
+            bottomDialogFragment.show(supportFragmentManager, bottomDialogFragment.tag)
         }
     }
 }
