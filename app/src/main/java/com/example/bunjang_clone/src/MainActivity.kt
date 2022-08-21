@@ -13,6 +13,7 @@ import com.example.bunjang_clone.src.search.SearchFragment
 import com.example.bunjang_clone.src.talk.TalkFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,8 +31,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             )
             true
         }
-
-
     }
 
     private fun replaceFragment(fragment: Fragment){
