@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivitySplashBinding
-import com.example.bunjang_clone.src.LoginActivity
+import com.example.bunjang_clone.src.login.LoginActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
 

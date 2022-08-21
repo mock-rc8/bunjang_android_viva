@@ -1,3 +1,17 @@
 <resources>
+    //navigation
+    <string name="navigation_home">홈</string>
+    <string name="navigation_search">검색</string>
+    <string name="navigation_register">등록</string>
+    <string name="navigation_talk">번개톡</string>
+    <string name="navigation_mypage">MY</string>
+    <string name="login_other">다른 방법으로 로그인</string>
+
+    //login
     <string name="app_name">bunjang_clone</string>
+    <string name="login_viewpager_text1">요즘 유행하는 메이저 취향부터\n나만 알고싶은 마이너 취향까지</string>
+    <string name="login_viewpager_text2">번개톡, 번개페이로\n거래의 시작부터 끝까지 안전하게</string>
+    <string name="login_viewpager_text3">포장택배 서비스로\n픽업/포장/배송을 한번에</string>
+    <string name="login_viewpager_text4">지금 바로 번개장터에서\n당신의 취향에 맞는 아이템들을 찾아보세요!</string>
+
 </resources>

@@ -27,7 +27,7 @@
         </activity>
         <activity android:name=".src.MainActivity"
             android:exported="false"/>
-        <activity android:name=".src.LoginActivity"
+        <activity android:name=".src.login.LoginActivity"
             android:exported="false"/>
     </application>
 

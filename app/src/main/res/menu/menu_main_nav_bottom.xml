@@ -7,7 +7,7 @@
         android:checked="true"
         android:enabled="true"
         android:icon="@drawable/icon_main_home"
-        android:title="홈"
+        android:title="@string/navigation_home"
         app:showAsAction="always" />
 
     <item
@@ -15,7 +15,7 @@
         android:checked="true"
         android:enabled="true"
         android:icon="@drawable/icon_main_search"
-        android:title="검색"
+        android:title="@string/navigation_search"
         app:showAsAction="always" />
 
     <item
@@ -23,7 +23,7 @@
         android:checked="true"
         android:enabled="true"
         android:icon="@drawable/icon_main_register"
-        android:title="등록"
+        android:title="@string/navigation_register"
         app:showAsAction="always" />
 
     <item
@@ -31,7 +31,7 @@
         android:checked="true"
         android:enabled="true"
         android:icon="@drawable/icon_main_talk"
-        android:title="번개톡"
+        android:title="@string/navigation_talk"
         app:showAsAction="always" />
 
     <item
@@ -39,7 +39,7 @@
         android:checked="true"
         android:enabled="true"
         android:icon="@drawable/icon_main_mypage"
-        android:title="MY"
+        android:title="@string/navigation_mypage"
         app:showAsAction="always" />
 
 </menu>
