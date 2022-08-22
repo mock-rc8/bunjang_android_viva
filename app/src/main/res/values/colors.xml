@@ -12,4 +12,7 @@
 
     <color name="light_gray">#A1A1A1</color>
     <color name="more_light_gray">#e6e6e6</color>
+    <color name="dark_gray">#626262</color>
+    <color name="light_red">#f20016</color>
+    <color name="light_pink">#fae1e3</color>
 </resources>

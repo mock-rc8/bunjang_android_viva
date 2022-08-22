@@ -14,4 +14,11 @@
     <string name="login_viewpager_text3">포장택배 서비스로\n픽업/포장/배송을 한번에</string>
     <string name="login_viewpager_text4">지금 바로 번개장터에서\n당신의 취향에 맞는 아이템들을 찾아보세요!</string>
 
+    //login bottom sheet
+    <string name="login_bottom_sheet_other">다른 방법으로 로그인</string>
+    <string name="login_bottom_sheet_facebook">페이스북으로 시작하기</string>
+    <string name="login_bottom_sheet_naver">네이버로 시작하기</string>
+    <string name="login_bottom_sheet_phone">본인인증으로 로그인</string>
+
+
 </resources>

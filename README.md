@@ -6,4 +6,7 @@
 ## 8월 21일
 - Splash 화면 구현
 - login layout 구현
+- other bottom dialog 구현
+
+## 8월 22일
 - 

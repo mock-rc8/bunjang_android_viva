@@ -29,6 +29,8 @@
             android:exported="false"/>
         <activity android:name=".src.login.LoginActivity"
             android:exported="false"/>
+        <activity android:name=".src.login.PhoneLoginActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

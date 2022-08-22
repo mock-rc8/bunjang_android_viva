@@ -2,6 +2,7 @@ package com.example.bunjang_clone.src.login
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -22,6 +23,12 @@ class OtherLoginBottomDialog : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginOtherSheetBinding.inflate(inflater, container, false)
+
+        binding.llLoginPhone.setOnClickListener {
+            startActivity(Intent(context, PhoneLoginActivity::class.java))
+            dialog?.dismiss()
+        }
+
         return binding.root
     }
 
