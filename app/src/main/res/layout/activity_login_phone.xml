@@ -92,6 +92,7 @@
                 app:layout_constraintStart_toStartOf="@id/tv_login_agency_title"
                 android:textSize="22sp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/tv_login_agency_title" />
 
             <ImageView
@@ -103,8 +104,8 @@
                 android:src="@drawable/icon_down_chevron"
                 app:tint="@color/light_gray" />
 
-
             <View
+                android:id="@+id/view_phone"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="13dp"
@@ -212,12 +213,14 @@
                 android:orientation="horizontal">
 
                 <View
+                    android:id="@+id/view_birthday1"
                     android:layout_width="180dp"
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/black" />
 
                 <View
+                    android:id="@+id/view_birthday2"
                     android:layout_width="30dp"
                     android:layout_height="1dp"
                     android:layout_marginStart="30dp"
@@ -258,6 +261,7 @@
             </EditText>
 
             <View
+                android:id="@+id/view_name"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="13dp"
@@ -274,7 +278,7 @@
         android:textColor="@color/white"
         android:layout_marginHorizontal="25dp"
         android:layout_marginBottom="35dp"
-        android:background="@drawable/login_button_color"
+        android:background="@drawable/login_color_red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
