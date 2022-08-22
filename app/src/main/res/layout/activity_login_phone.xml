@@ -275,6 +275,8 @@
         android:layout_height="wrap_content"
         android:text="다음"
         android:enabled="false"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:layout_marginHorizontal="25dp"
         android:layout_marginBottom="35dp"

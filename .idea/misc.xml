@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/bottom_sheet_background.xml" value="0.2085" />
+        <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/btn_all_agree_option.xml" value="0.2085" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/cursor_background.xml" value="0.2085" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/login_birthday_password.xml" value="0.2085" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/login_button_color.xml" value="0.2085" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/dialog_loading.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/dialog_login_agency.xml" value="0.2997007268063275" />
+        <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/dialog_login_agreement.xml" value="0.2997007268063275" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/fragment_home.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/fragment_login_other_sheet.xml" value="0.264" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/fragment_mypage.xml" value="0.3651041666666667" />
@@ -25,6 +27,7 @@
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/fragment_search.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/fragment_talk.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/item_login_agency.xml" value="0.2997007268063275" />
+        <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/item_login_agree.xml" value="0.2997007268063275" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/login_viewpager.xml" value="0.30055579307396324" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/menu/menu_main_nav_bottom.xml" value="0.36614583333333334" />
       </map>

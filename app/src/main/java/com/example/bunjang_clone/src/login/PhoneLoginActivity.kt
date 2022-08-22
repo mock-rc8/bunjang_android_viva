@@ -12,6 +12,7 @@ import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityLoginPhoneBinding
 import com.example.bunjang_clone.src.login.models.LoginAgencyData
+import com.example.bunjang_clone.src.login.models.LoginAgreeData
 import com.example.bunjang_clone.src.login.models.ViewPagerAd
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
@@ -23,11 +24,16 @@ class PhoneLoginActivity : BaseActivity<ActivityLoginPhoneBinding>(ActivityLogin
     private var sex = false
     private var agency = false
     private var phone = false
+    private var password = false
 
     var AgencyList = ArrayList<LoginAgencyData>()
+    var AgreeList = ArrayList<LoginAgreeData>()
 
     private lateinit var agencyAdapter: LoginAgencyRvAdapter
     private lateinit var agencyDialog : BottomSheetDialog
+
+    private lateinit var agreeAdapter: LoginAgreeRvAdapter
+    private lateinit var agreeDialog : BottomSheetDialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +42,7 @@ class PhoneLoginActivity : BaseActivity<ActivityLoginPhoneBinding>(ActivityLogin
         binding.btnLoginNext.setOnClickListener(this)
         checkName()
         setAgency()
+        setAgree()
 
         binding.ivPhoneBack.setOnClickListener {
             finish()
@@ -74,6 +81,36 @@ class PhoneLoginActivity : BaseActivity<ActivityLoginPhoneBinding>(ActivityLogin
             }
 
         })
+    }
+    private fun setAgree() {
+        AgreeList.add(LoginAgreeData("번개장터 이용약관 (필수)", false ))
+        AgreeList.add(LoginAgreeData("개인정보 수집 이용 동의 (필수)", false ))
+        AgreeList.add(LoginAgreeData("휴대폰 본인확인서비스 (필수)", false))
+        AgreeList.add(LoginAgreeData("휴면시 개인정보 분리보관 동의 (필수)", false ))
+        AgreeList.add(LoginAgreeData("위치정보 이용약관 동의 (필수)", false ))
+        AgreeList.add(LoginAgreeData("개인정보 수집 이용 동의 (선택)", false ))
+        AgreeList.add(LoginAgreeData("마케팅 수신 동의 (선택)", false ))
+        AgreeList.add(LoginAgreeData("개인정보 광고활용 동의 (선택)", false ))
+
+        val agreeView = layoutInflater.inflate(R.layout.dialog_login_agreement, null)
+        agreeDialog = BottomSheetDialog(this)
+        agreeDialog.setContentView(agreeView)
+
+        agreeAdapter = LoginAgreeRvAdapter(this, AgreeList)
+
+        // 리사이클러뷰 연결
+        val agreeRv = agreeView.findViewById<RecyclerView>(R.id.rv_dialog_agree_list)
+        agreeRv.adapter = agreeAdapter
+
+        agreeAdapter.clickListener(object : LoginAgreeRvAdapter.OnItemClickListener {
+            override fun onClick(view: View, position: Int) {
+                agreeAdapter.notifyDataSetChanged()
+                agencyDialog.dismiss()
+            }
+
+        })
+
+
     }
 
     // 이름
@@ -153,6 +190,7 @@ class PhoneLoginActivity : BaseActivity<ActivityLoginPhoneBinding>(ActivityLogin
             override fun afterTextChanged(s: Editable?) {
                 binding.btnLoginNext.isEnabled = binding.etLoginPhoneNumber.length() > 10
                 phone = true
+                binding.tvLoginTitle.text = "입력한 정보를\n확인해주세요"
             }
 
         })
@@ -182,6 +220,9 @@ class PhoneLoginActivity : BaseActivity<ActivityLoginPhoneBinding>(ActivityLogin
                     binding.btnLoginNext.text = "확인"
                     binding.btnLoginNext.isEnabled = false
                     checkPhoneNumber()
+                }
+                if (phone && !password){
+                    agreeDialog.show()
                 }
             }
         }
