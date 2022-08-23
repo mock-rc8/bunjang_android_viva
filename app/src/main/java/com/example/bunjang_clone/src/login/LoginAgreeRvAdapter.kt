@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.databinding.ItemLoginAgencyBinding
@@ -16,6 +17,8 @@ class LoginAgreeRvAdapter(context: Context, AgreeList : ArrayList<LoginAgreeData
     private lateinit var clickListener : OnItemClickListener
     var agreeList : ArrayList<LoginAgreeData> = AgreeList
 
+    private val context = context
+
     interface OnItemClickListener {
         fun onClick(view: View, position: Int)
     }
@@ -26,11 +29,6 @@ class LoginAgreeRvAdapter(context: Context, AgreeList : ArrayList<LoginAgreeData
     inner class LoginAgreeViewHolder(val binding: ItemLoginAgreeBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: LoginAgreeData) {
             binding.tvDialogPermission.text = item.text
-            if (item.isCheck) {
-                binding.ivDialogAgree.setImageResource(R.drawable.icon_agree)
-            } else {
-                binding.ivDialogAgree.setImageResource(R.drawable.icon_unagree)
-            }
         }
     }
 
@@ -46,9 +44,21 @@ class LoginAgreeRvAdapter(context: Context, AgreeList : ArrayList<LoginAgreeData
         holder.itemView.setOnClickListener {
             clickListener.onClick(it, position)
         }
+        if (agreeList[position].isCheck){
+            holder.binding.ivDialogAgree.setImageResource(R.drawable.icon_agree)
+        } else {
+            holder.binding.ivDialogAgree.setImageResource(R.drawable.icon_unagree)
+        }
     }
 
     override fun getItemCount(): Int {
         return agreeList.size
+    }
+
+    fun setAgencyItem(items : ArrayList<LoginAgreeData>) {
+        if (!items.isNullOrEmpty()){
+            agreeList = items
+            notifyDataSetChanged()
+        }
     }
 }

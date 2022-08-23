@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bunjang_clone.R
 import com.example.bunjang_clone.databinding.ItemLoginAgencyBinding
 import com.example.bunjang_clone.src.login.models.LoginAgencyData
 
@@ -12,6 +14,8 @@ class LoginAgencyRvAdapter(context: Context, AgencyList : ArrayList<LoginAgencyD
 
     private lateinit var clickListener : OnItemClickListener
     var itemList : ArrayList<LoginAgencyData> = AgencyList
+
+    private val context = context
 
     interface OnItemClickListener {
         fun onClick(view: View, position: Int)
@@ -38,9 +42,24 @@ class LoginAgencyRvAdapter(context: Context, AgencyList : ArrayList<LoginAgencyD
         holder.itemView.setOnClickListener {
             clickListener.onClick(it, position)
         }
+
+        if (itemList[position].click) {
+            holder.binding.tvLoginAgency.setTextColor(ContextCompat.getColor(context, R.color.light_red))
+            holder.binding.ivLoginAgencyClick.setImageResource(R.drawable.icon_radio_click)
+        } else {
+            holder.binding.tvLoginAgency.setTextColor(ContextCompat.getColor(context, R.color.black))
+            holder.binding.ivLoginAgencyClick.setImageResource(R.drawable.icon_radio_unclick)
+        }
     }
 
     override fun getItemCount(): Int {
         return itemList.size
+    }
+
+    fun setAgencyItem(items : ArrayList<LoginAgencyData>) {
+        if (!items.isNullOrEmpty()){
+            itemList = items
+            notifyDataSetChanged()
+        }
     }
 }

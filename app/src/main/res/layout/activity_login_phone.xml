@@ -28,6 +28,87 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/ll_login_shop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="35dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_title">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상점명"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_login_shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="text"
+                android:nextFocusDown="@id/et_login_birthday"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/cursor_background"
+                android:textSize="22sp"
+                android:textStyle="bold">
+            </EditText>
+
+            <View
+                android:id="@+id/view_shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="13dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="한글, 영어, 숫자만 사용할 수 있어요. (최대 10자)\n상점명은 고객님의 닉네임으로 사용될 예정이에요."
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="35dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_title">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호 입력"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:nextFocusDown="@id/et_login_birthday"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/cursor_background"
+                android:textSize="22sp"
+                android:textStyle="bold">
+            </EditText>
+
+            <View
+                android:id="@+id/view_password"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="13dp"
+                android:background="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/ll_login_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +131,7 @@
                 android:background="@null"
                 android:inputType="phone"
                 android:hint="01012345678"
-                android:nextFocusDown="@id/et_login_birthday"
+                android:nextFocusDown="@id/et_login_password"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@drawable/cursor_background"
                 android:textSize="22sp"
@@ -58,6 +139,7 @@
             </EditText>
 
             <View
+                android:id="@+id/view_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="13dp"
@@ -232,6 +314,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_login_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
