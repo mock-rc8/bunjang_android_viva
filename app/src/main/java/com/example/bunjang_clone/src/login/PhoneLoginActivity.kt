@@ -1,19 +1,16 @@
 package com.example.bunjang_clone.src.login
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityLoginPhoneBinding
 import com.example.bunjang_clone.src.login.models.LoginAgencyData
 import com.example.bunjang_clone.src.login.models.LoginAgreeData
-import com.example.bunjang_clone.src.login.models.ViewPagerAd
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class PhoneLoginActivity : BaseActivity<ActivityLoginPhoneBinding>(ActivityLoginPhoneBinding::inflate),
@@ -39,15 +36,23 @@ class PhoneLoginActivity : BaseActivity<ActivityLoginPhoneBinding>(ActivityLogin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // 확인버튼은 선택
         binding.btnLoginNext.setOnClickListener(this)
+        
+        // 이름 메소도
         checkName()
+        
+        // 통신사 선택
         setAgency()
+        
+        // 약관 동의
         setAgree()
 
         binding.ivPhoneBack.setOnClickListener {
             finish()
         }
     }
+
     private fun setAgency() {
         AgencyList.add(LoginAgencyData("SKT", R.drawable.icon_radio_unclick ))
         AgencyList.add(LoginAgencyData("KT", R.drawable.icon_radio_unclick ))
@@ -73,15 +78,14 @@ class PhoneLoginActivity : BaseActivity<ActivityLoginPhoneBinding>(ActivityLogin
         agencyAdapter.clickListener(object : LoginAgencyRvAdapter.OnItemClickListener {
             override fun onClick(view: View, position: Int) {
                 binding.tvLoginPhoneAgency.text = agencyAdapter.itemList[position].title
-                agencyAdapter.notifyDataSetChanged()
                 agencyDialog.dismiss()
-
                 agency = true
                 checkPhoneNumber()
             }
 
         })
     }
+
     private fun setAgree() {
         AgreeList.add(LoginAgreeData("번개장터 이용약관 (필수)", false ))
         AgreeList.add(LoginAgreeData("개인정보 수집 이용 동의 (필수)", false ))
@@ -104,13 +108,11 @@ class PhoneLoginActivity : BaseActivity<ActivityLoginPhoneBinding>(ActivityLogin
 
         agreeAdapter.clickListener(object : LoginAgreeRvAdapter.OnItemClickListener {
             override fun onClick(view: View, position: Int) {
-                agreeAdapter.notifyDataSetChanged()
-                agencyDialog.dismiss()
+                agreeView.findViewById<AppCompatButton>(R.id.btn_dialog_next).isClickable =
+                    (agreeAdapter.agreeList[0].isCheck && agreeAdapter.agreeList[1].isCheck && agreeAdapter.agreeList[2].isCheck
+                            && agreeAdapter.agreeList[3].isCheck && agreeAdapter.agreeList[4].isCheck)
             }
-
         })
-
-
     }
 
     // 이름

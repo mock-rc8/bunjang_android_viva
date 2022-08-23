@@ -9,4 +9,7 @@
 - other bottom dialog 구현
 
 ## 8월 22일
-- 
+- Sign Up 구현
+- 각종 통신사, 약관 bottom View 구현
+
+## 8월 23일

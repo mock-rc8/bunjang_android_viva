@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/login_color_red"
-            android:enabled="false"
+            android:clickable="false"
             android:text="확인"
             android:textColor="@color/white"
             android:textSize="18sp"
