@@ -1,22 +1,22 @@
 package com.example.bunjang_clone.src.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityLoginPhoneBinding
 import com.example.bunjang_clone.src.MainActivity
-import com.example.bunjang_clone.src.home.HomeFragment
+import com.example.bunjang_clone.src.login.adapter.LoginAgencyRvAdapter
+import com.example.bunjang_clone.src.login.adapter.LoginAgreeRvAdapter
 import com.example.bunjang_clone.src.login.models.LoginAgencyData
 import com.example.bunjang_clone.src.login.models.LoginAgreeData
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -44,6 +44,8 @@ class PhoneLoginActivity :
     private lateinit var agreeAdapter: LoginAgreeRvAdapter
     private lateinit var agreeDialog: BottomSheetDialog
 
+    private lateinit var loginActivityInterface : LoginActivityInterface
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +61,8 @@ class PhoneLoginActivity :
 
         // 약관 동의
         setAgree()
-
+        
+        // 뒤로돌아가기
         binding.ivPhoneBack.setOnClickListener {
             finish()
         }
@@ -173,6 +176,12 @@ class PhoneLoginActivity :
                     }
                 }
                 allclick = true
+            }
+            agreeView.findViewById<AppCompatButton>(R.id.btn_dialog_next).setOnClickListener {
+                agreeDialog.dismiss()
+                LoginService(loginActivityInterface).loginSignUp(
+
+                )
             }
         }
     }

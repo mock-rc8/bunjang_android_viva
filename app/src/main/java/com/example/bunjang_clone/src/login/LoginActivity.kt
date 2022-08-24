@@ -9,6 +9,8 @@ import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityLoginBinding
 import com.example.bunjang_clone.src.MainActivity
+import com.example.bunjang_clone.src.login.adapter.LoginVpAdapter
+import com.example.bunjang_clone.src.login.adapter.OtherLoginBottomDialog
 import com.example.bunjang_clone.src.login.models.ViewPagerAd
 import com.google.android.material.bottomsheet.BottomSheetDialog
 

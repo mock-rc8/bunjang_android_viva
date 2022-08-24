@@ -1,15 +1,12 @@
-package com.example.bunjang_clone.src.login
+package com.example.bunjang_clone.src.login.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bunjang_clone.R
-import com.example.bunjang_clone.databinding.ItemLoginAgencyBinding
 import com.example.bunjang_clone.databinding.ItemLoginAgreeBinding
-import com.example.bunjang_clone.src.login.models.LoginAgencyData
 import com.example.bunjang_clone.src.login.models.LoginAgreeData
 
 class LoginAgreeRvAdapter(context: Context, AgreeList : ArrayList<LoginAgreeData>) : RecyclerView.Adapter<LoginAgreeRvAdapter.LoginAgreeViewHolder>() {

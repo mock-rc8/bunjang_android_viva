@@ -1,4 +1,4 @@
-package com.example.bunjang_clone.src.login
+package com.example.bunjang_clone.src.login.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
