@@ -17,4 +17,7 @@
 - 홈화면 구현50%
 
 ## 8월 24일
--
+- 회원가입 api 적용중
+- 홈화면 indicate 구현중
+- 홈화면 recyclerview 구현중
+- 홈화면 브랜드 viewpager 구현중

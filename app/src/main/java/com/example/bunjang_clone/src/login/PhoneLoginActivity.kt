@@ -47,9 +47,6 @@ class PhoneLoginActivity :
     private lateinit var agreeAdapter: LoginAgreeRvAdapter
     private lateinit var agreeDialog: BottomSheetDialog
 
-    private lateinit var loginActivityInterface : LoginActivityInterface
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -352,7 +349,7 @@ class PhoneLoginActivity :
                     shopName()
                 }
                 if (password && shopName){
-                    LoginService(loginActivityInterface).loginSignUp(
+                    LoginService(this).loginSignUp(
                         binding.etLoginName.text.toString(),
                         binding.etLoginBirthday.text.toString(),
                         binding.tvLoginPhoneAgency.text.toString(),
