@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
@@ -12,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bunjang_clone.R
+import com.example.bunjang_clone.config.ApplicationClass
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityLoginPhoneBinding
 import com.example.bunjang_clone.src.MainActivity
@@ -19,11 +21,12 @@ import com.example.bunjang_clone.src.login.adapter.LoginAgencyRvAdapter
 import com.example.bunjang_clone.src.login.adapter.LoginAgreeRvAdapter
 import com.example.bunjang_clone.src.login.models.LoginAgencyData
 import com.example.bunjang_clone.src.login.models.LoginAgreeData
+import com.example.bunjang_clone.src.login.models.LoginData
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class PhoneLoginActivity :
     BaseActivity<ActivityLoginPhoneBinding>(ActivityLoginPhoneBinding::inflate),
-    View.OnClickListener {
+    View.OnClickListener, LoginActivityInterface {
 
     private var name = false
     private var birthday = false
@@ -176,12 +179,6 @@ class PhoneLoginActivity :
                     }
                 }
                 allclick = true
-            }
-            agreeView.findViewById<AppCompatButton>(R.id.btn_dialog_next).setOnClickListener {
-                agreeDialog.dismiss()
-                LoginService(loginActivityInterface).loginSignUp(
-
-                )
             }
         }
     }
@@ -354,11 +351,31 @@ class PhoneLoginActivity :
                     binding.btnLoginNext.isEnabled = false
                     shopName()
                 }
-                if (shopName){
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                if (password && shopName){
+                    LoginService(loginActivityInterface).loginSignUp(
+                        binding.etLoginName.text.toString(),
+                        binding.etLoginBirthday.text.toString(),
+                        binding.tvLoginPhoneAgency.text.toString(),
+                        binding.etLoginPhoneNumber.text.toString(),
+                        binding.etLoginPassword.text.toString(),
+                        binding.etLoginShopName.text.toString()
+                    )
                 }
             }
         }
+    }
+    override fun onSingUpSuccess(response : LoginData) {
+        Log.d("jwt확인", "SingUp : ${response.result.jwt}")
+        ApplicationClass.sSharedPreferences.edit().putString("Bunjang", response.result.jwt).apply()
+        Log.d("jwt확인", "SingUp : ${response.code}")
+        if (response.code == 1000) {
+        }
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+
+    }
+
+    override fun onSingUpFail(message: String) {
+
     }
 }

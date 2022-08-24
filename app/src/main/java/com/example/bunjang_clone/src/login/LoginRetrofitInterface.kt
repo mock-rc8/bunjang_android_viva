@@ -7,6 +7,8 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface LoginRetrofitInterface {
-    @POST("/bunjang/users/log-in")
+    @POST("/bunjang/users")
     fun sigUp( @Body userData: UserData) : Call<LoginData>
+
+//    @POST("/bunjang/users/log-in")
 }
