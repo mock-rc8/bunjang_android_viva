@@ -77,7 +77,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             }
         }
     }
-    fun bottomSheet(){
+
+    private fun bottomSheet(){
         val bottomSheet = layoutInflater.inflate(R.layout.fragment_login_other_sheet, null)
         val bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(bottomSheet)
