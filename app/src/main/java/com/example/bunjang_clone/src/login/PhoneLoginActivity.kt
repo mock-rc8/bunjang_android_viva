@@ -1,6 +1,5 @@
 package com.example.bunjang_clone.src.login
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -21,7 +20,8 @@ import com.example.bunjang_clone.src.login.adapter.LoginAgencyRvAdapter
 import com.example.bunjang_clone.src.login.adapter.LoginAgreeRvAdapter
 import com.example.bunjang_clone.src.login.models.LoginAgencyData
 import com.example.bunjang_clone.src.login.models.LoginAgreeData
-import com.example.bunjang_clone.src.login.models.LoginData
+import com.example.bunjang_clone.src.login.models.LoginResponse
+import com.example.bunjang_clone.src.login.models.SignUpResponse
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class PhoneLoginActivity :
@@ -346,33 +346,61 @@ class PhoneLoginActivity :
                 if(password && !shopName){
                     binding.btnLoginNext.text = "확인"
                     binding.btnLoginNext.isEnabled = false
-                    shopName()
+                    tryLogin()
                 }
                 if (password && shopName){
-                    LoginService(this).loginSignUp(
-                        binding.etLoginName.text.toString(),
-                        binding.etLoginBirthday.text.toString(),
-                        binding.tvLoginPhoneAgency.text.toString(),
-                        binding.etLoginPhoneNumber.text.toString(),
-                        binding.etLoginPassword.text.toString(),
-                        binding.etLoginShopName.text.toString()
-                    )
+                    trySignUp()
                 }
             }
         }
     }
-    override fun onSingUpSuccess(response : LoginData) {
-        Log.d("jwt확인", "SingUp : ${response.result.jwt}")
-        ApplicationClass.sSharedPreferences.edit().putString("Bunjang", response.result.jwt).apply()
-        Log.d("jwt확인", "SingUp : ${response.code}")
-        if (response.code == 1000) {
-        }
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
-
+    fun trySignUp() {
+        LoginService(this).SignUp(
+            binding.etLoginName.text.toString(),
+            binding.etLoginSex.text.toString(),
+            binding.etLoginBirthday.text.toString(),
+            binding.tvLoginPhoneAgency.text.toString(),
+            binding.etLoginPhoneNumber.text.toString(),
+            binding.etLoginPassword.text.toString(),
+            binding.etLoginShopName.text.toString()
+        )
+    }
+    fun tryLogin() {
+        LoginService(this).Login(
+            binding.etLoginName.text.toString(),
+            binding.etLoginSex.text.toString(),
+            binding.etLoginBirthday.text.toString(),
+            binding.tvLoginPhoneAgency.text.toString(),
+            binding.etLoginPhoneNumber.text.toString(),
+            binding.etLoginPassword.text.toString()
+        )
     }
 
+    override fun onSingUpSuccess(response : SignUpResponse) {
+        if (response.isSuccess){
+            Log.d("jwt확인", "SingUp : ${response.result.jwt}")
+            ApplicationClass.sSharedPreferences.edit().putString("Bunjang", response.result.jwt).apply()
+            Log.d("jwt확인", "SingUp : ${response.code}")
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+    }
     override fun onSingUpFail(message: String) {
 
+    }
+    override fun onLoginSuccess(response: LoginResponse) {
+
+        if(response.isSuccess){
+            Log.d("jwt확인", "SingUp : ${response.result.jwt}")
+            ApplicationClass.sSharedPreferences.edit().putString("Bunjang", response.result.jwt).apply()
+            Log.d("jwt확인", "SingUp : ${response.code}")
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        } else {
+            if (response.code == 2021)
+                shopName()
+        }
+    }
+    override fun onLoginFail(message: String) {
     }
 }

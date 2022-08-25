@@ -2,6 +2,7 @@ package com.example.bunjang_clone.src.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.FragmentActivity
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseFragment
 import com.example.bunjang_clone.databinding.FragmentHomeBinding

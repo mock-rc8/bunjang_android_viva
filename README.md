@@ -21,3 +21,7 @@
 - 홈화면 indicate 구현중
 - 홈화면 recyclerview 구현중
 - 홈화면 브랜드 viewpager 구현중
+
+## 8월 25일
+- 회원가입 api 적용 완료
+- 로그인 api 적용 완료
