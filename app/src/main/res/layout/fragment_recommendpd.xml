@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_home_recommend_item"
         android:layout_width="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:orientation="vertical"

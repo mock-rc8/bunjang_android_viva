@@ -1,17 +1,11 @@
 package com.example.bunjang_clone.src.home
 
-import com.example.bunjang_clone.src.login.models.LoginData
-import com.example.bunjang_clone.src.login.models.LoginResponse
-import com.example.bunjang_clone.src.login.models.SignUpResponse
-import com.example.bunjang_clone.src.login.models.SignUpData
+import com.example.bunjang_clone.src.home.models.RecommendResponse
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.GET
 
 interface RecommendRetrofitInterface {
-    @POST("/bunjang/products")
-    fun signUp( @Body signUpData: SignUpData) : Call<SignUpResponse>
+    @GET("/bunjang/products")
+    fun getRecommendPd() : Call<RecommendResponse>
 
-    @POST("/bunjang/users/log-in")
-    fun loinIn(@Body loginData: LoginData) : Call<LoginResponse>
 }

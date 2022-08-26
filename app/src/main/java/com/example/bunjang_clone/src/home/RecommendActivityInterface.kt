@@ -1,15 +1,11 @@
 package com.example.bunjang_clone.src.home
 
-import com.example.bunjang_clone.src.login.models.LoginResponse
-import com.example.bunjang_clone.src.login.models.SignUpResponse
+import com.example.bunjang_clone.src.home.models.RecommendResponse
 
 interface RecommendActivityInterface {
 
-    fun onSingUpSuccess(response : SignUpResponse)
+    fun onGetDataSuccess(response : RecommendResponse)
 
-    fun onSingUpFail(message : String)
+    fun onGetDataFail(message : String)
 
-    fun onLoginSuccess(response : LoginResponse)
-
-    fun onLoginFail(message : String)
 }
