@@ -379,7 +379,7 @@ class PhoneLoginActivity :
     override fun onSingUpSuccess(response : SignUpResponse) {
         if (response.isSuccess){
             Log.d("jwt확인", "SingUp : ${response.result.jwt}")
-            ApplicationClass.sSharedPreferences.edit().putString("Bunjang", response.result.jwt).apply()
+            ApplicationClass.sSharedPreferences.edit().putString("X-ACCESS-TOKEN", response.result.jwt).apply()
             Log.d("jwt확인", "SingUp : ${response.code}")
             startActivity(Intent(this, MainActivity::class.java))
             finish()
@@ -392,7 +392,7 @@ class PhoneLoginActivity :
 
         if(response.isSuccess){
             Log.d("jwt확인", "SingUp : ${response.result.jwt}")
-            ApplicationClass.sSharedPreferences.edit().putString("Bunjang", response.result.jwt).apply()
+            ApplicationClass.sSharedPreferences.edit().putString("X-ACCESS-TOKEN", response.result.jwt).apply()
             Log.d("jwt확인", "SingUp : ${response.code}")
             startActivity(Intent(this, MainActivity::class.java))
             finish()

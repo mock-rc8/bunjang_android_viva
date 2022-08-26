@@ -1,14 +1,21 @@
 package com.example.bunjang_clone.src.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseFragment
 import com.example.bunjang_clone.databinding.FragmentHomeBinding
+import com.example.bunjang_clone.src.home.adapter.AdSliderAdapter
+import com.example.bunjang_clone.src.home.adapter.HomeVpAdapter
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlin.math.abs
+import kotlin.math.min
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home) {
 
@@ -18,7 +25,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 
     private lateinit var adSliderAdapter: AdSliderAdapter
 
-    var adPageCnt = 0
+    private var adPageCnt = 0
     
     private val information = arrayListOf("추천상품", "브랜드\uD83D\uDD34")
 
@@ -34,16 +41,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         // 중간 추천상품, 브랜드
         productAdapter()
 
-        adTread = Thread() {
-            val handler = Handler(Looper.getMainLooper())
-            while (adViewThred) {
-                handler.post {
-                    binding.vpHomeAd.setCurrentItem(adPageCnt++ % adViewList.size, false)
-                }
-                Thread.sleep(2000)
+        binding.appbarHome.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val alpha = min(abs(verticalOffset / 3), 255)
+            binding.toolbarHome.setBackgroundColor(Color.argb(alpha, 255, 255, 255))
+            if (alpha > 255 / 2){
+                binding.ivHomeMore.setColorFilter(Color.rgb(0,0,0))
+                binding.ivHomeAlarm.setColorFilter(Color.rgb(0,0,0))
+                binding.ivHomeSearch.setColorFilter(Color.rgb(0,0,0))
+            } else {
+                binding.ivHomeMore.setColorFilter(Color.rgb(255,255,255))
+                binding.ivHomeAlarm.setColorFilter(Color.rgb(255,255,255))
+                binding.ivHomeSearch.setColorFilter(Color.rgb(255,255,255))
             }
-        }
-        adTread.start()
+        })
 
     }
 
@@ -71,6 +81,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
                 super.onPageSelected(position)
             }
         })
+
+        adTread = Thread() {
+            val handler = Handler(Looper.getMainLooper())
+            while (adViewThred) {
+                handler.post {
+                    binding.vpHomeAd.setCurrentItem(adPageCnt++ % adViewList.size, false)
+                }
+                Thread.sleep(2000)
+            }
+        }
+        adTread.start()
+
     }
 
     override fun onDestroy() {
