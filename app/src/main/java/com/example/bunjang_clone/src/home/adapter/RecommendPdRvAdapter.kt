@@ -1,5 +1,6 @@
 package com.example.bunjang_clone.src.home.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +15,7 @@ class RecommendPdRvAdapter() : RecyclerView.Adapter<RecommendPdRvAdapter.Recomme
 
     private var productList = mutableListOf<RecommendItem>()
 
-    private lateinit var pdClickListener : OnPdClickListener
-
     val priceFormat = DecimalFormat("#,###")
-
-    interface OnPdClickListener {
-        fun onClick(view : View, position: Int)
-    }
-    fun clickListener(onPdClickListener : OnPdClickListener) {
-        this.pdClickListener = onPdClickListener
-    }
 
     inner class RecommendViewHolder(val binding: ItemHomeRecommendBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: RecommendItem) {
@@ -57,6 +49,7 @@ class RecommendPdRvAdapter() : RecyclerView.Adapter<RecommendPdRvAdapter.Recomme
 
     override fun onBindViewHolder(holder: RecommendViewHolder, position: Int) {
         holder.bind(productList[position])
+
     }
 
     override fun getItemCount(): Int {

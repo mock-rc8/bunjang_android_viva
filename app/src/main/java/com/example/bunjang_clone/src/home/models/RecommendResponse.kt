@@ -9,6 +9,7 @@ data class RecommendResponse(
     var result : List<RecommendItem>
 )
 data class RecommendItem(
+    var productIdx : Int,
     var productURL : String,
     var price : Int,
     var productName : String,
