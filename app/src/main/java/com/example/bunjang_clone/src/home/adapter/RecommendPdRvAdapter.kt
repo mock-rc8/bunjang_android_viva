@@ -1,13 +1,16 @@
 package com.example.bunjang_clone.src.home.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.databinding.ItemHomeRecommendBinding
+import com.example.bunjang_clone.src.home.detail.ProductDetailActivity
 import com.example.bunjang_clone.src.home.models.RecommendItem
 import java.text.DecimalFormat
 
@@ -50,6 +53,13 @@ class RecommendPdRvAdapter() : RecyclerView.Adapter<RecommendPdRvAdapter.Recomme
     override fun onBindViewHolder(holder: RecommendViewHolder, position: Int) {
         holder.bind(productList[position])
 
+        holder.itemView.setOnClickListener {
+            val productIdx = productList[position].productIdx
+            Log.d("productIdx","$productIdx")
+            var intent = Intent(it.context, ProductDetailActivity::class.java)
+            intent.putExtra("productIdx", productIdx)
+            ContextCompat.startActivity(it.context, intent, null)
+        }
     }
 
     override fun getItemCount(): Int {

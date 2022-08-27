@@ -311,6 +311,7 @@
                 app:layout_constraintTop_toBottomOf="@id/view_product_detail_line">
 
                 <TextView
+                    android:id="@+id/tv_product_explain1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="7dp"
@@ -333,6 +334,7 @@
                 app:layout_constraintTop_toTopOf="@id/cv_product_explain1">
 
                 <TextView
+                    android:id="@+id/tv_product_explain2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="7dp"
@@ -355,6 +357,7 @@
                 app:layout_constraintTop_toTopOf="@id/cv_product_explain1">
 
                 <TextView
+                    android:id="@+id/tv_product_explain3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="7dp"
@@ -377,6 +380,7 @@
                 app:layout_constraintTop_toTopOf="@id/cv_product_explain1">
 
                 <TextView
+                    android:id="@+id/tv_product_explain4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="7dp"
@@ -411,6 +415,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_product_title_explain">
 
                 <TextView
+                    android:id="@+id/tv_product_tag1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="7dp"
@@ -431,6 +436,7 @@
                 app:layout_constraintTop_toTopOf="@+id/cv_product_tag1">
 
                 <TextView
+                    android:id="@+id/tv_product_tag2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="7dp"

@@ -22,5 +22,5 @@ data class DetailResult(
     var shippingFee : String,
     var exchange : String,
     var productExplaination : String,
-    var hashtag : String,
+    var hashtag : List<String>
 )

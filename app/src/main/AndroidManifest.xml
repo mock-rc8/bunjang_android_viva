@@ -32,6 +32,8 @@
         <activity android:name=".src.login.PhoneLoginActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="false"/>
+        <activity android:name=".src.home.detail.ProductDetailActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
