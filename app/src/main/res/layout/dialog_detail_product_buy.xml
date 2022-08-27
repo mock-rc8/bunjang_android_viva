@@ -21,32 +21,130 @@
         android:id="@+id/tv_detail_pd_choice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="거래방법을 선택해주세요"
         android:layout_marginTop="10dp"
+        android:text="거래방법을 선택해주세요"
         app:layout_constraintStart_toStartOf="@id/tv_detail_pd_title"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_pd_title" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_product_delivery"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_pd_choice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/btn_product_event"
-        android:layout_height="wrap_content">
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_pd_choice">
 
         <ImageView
-            android:id="@+id/iv_login_agency_click"
+            android:id="@+id/iv_product_deal_click"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginStart="20dp"
             android:src="@drawable/icon_radio_unclick"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_product_delivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="택배거래"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_product_deal_click"
+            app:layout_constraintStart_toEndOf="@id/iv_product_deal_click"
+            app:layout_constraintTop_toTopOf="@id/iv_product_deal_click" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="상품을 받을 때까지 결제금액을 보관해요"
+            android:textColor="@color/light_gray"
+            app:layout_constraintStart_toStartOf="@id/tv_product_delivery"
+            app:layout_constraintTop_toBottomOf="@id/tv_product_delivery" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_product_meet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/btn_product_event"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_product_delivery">
+
+        <ImageView
+            android:id="@+id/iv_product_meet_click"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_radio_unclick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_product_meet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="직거래"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_product_meet_click"
+            app:layout_constraintStart_toEndOf="@id/iv_product_meet_click"
+            app:layout_constraintTop_toTopOf="@id/iv_product_meet_click" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="현금없이 간편하게 결제할 수 있어요"
+            android:textColor="@color/light_gray"
+            app:layout_constraintStart_toStartOf="@id/tv_product_meet"
+            app:layout_constraintTop_toBottomOf="@id/tv_product_meet" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_detail_product_buy_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_color_red"
+        android:text="다음"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_product_meet" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/dialog_detail_product_bottom_explain"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/btn_detail_product_buy_next"
+        app:layout_constraintStart_toStartOf="@id/btn_detail_product_buy_next"
+        app:layout_constraintTop_toBottomOf="@id/btn_detail_product_buy_next" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

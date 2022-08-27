@@ -21,4 +21,8 @@
     <string name="login_bottom_sheet_phone">본인인증으로 로그인</string>
 
 
+    //Dialog product buy
+    <string name="dialog_detail_product_bottom_explain"><u>번개페이 안전결제란?</u></string>
+
+
 </resources>

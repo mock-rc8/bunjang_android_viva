@@ -66,11 +66,7 @@ class ProductDetailActivity() :
         binding.tvProductTalk.text = items.talk.toString()
         binding.tvProductHeart.text = items.heart.toString()
         binding.tvProductEye.text = items.views.toString()
-        if (items.status == "중고") {
-            binding.tvProductExplain1.text = "중고상품"
-        } else {
-            binding.tvProductExplain1.text = "새상품"
-        }
+        binding.tvProductExplain1.text = items.status
         binding.tvProductExplain2.text = "총" +items.quantity.toString()+"개"
         binding.tvProductExplain3.text = items.shippingFee
         binding.tvProductExplain4.text = items.exchange
