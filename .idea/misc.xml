@@ -6,8 +6,10 @@
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2085" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/bottom_sheet_background.xml" value="0.2085" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/btn_all_agree_option.xml" value="0.2085" />
+        <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/btn_buy_point_background.xml" value="0.225" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/btn_product_event.xml" value="0.1865" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/btn_product_evnet.xml" value="0.1865" />
+        <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/btn_product_red.xml" value="0.225" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/card_product_tag.xml" value="0.1865" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/cursor_background.xml" value="0.2085" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/home_banner_background.xml" value="0.2085" />
@@ -29,6 +31,7 @@
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/recommend_item_home_dot.xml" value="0.2085" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/shape_circle_black.xml" value="0.2085" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/drawable/shape_circle_gray.xml" value="0.2085" />
+        <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/activity_delivery_buy.xml" value="0.2997007268063275" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/activity_login_phone.xml" value="0.30055579307396324" />
         <entry key="..\:/Users/yunja/AndroidStudioProjects/bunjang_clone/app/src/main/res/layout/activity_main.xml" value="0.264" />
