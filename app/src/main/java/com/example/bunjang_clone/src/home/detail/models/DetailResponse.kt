@@ -9,6 +9,8 @@ data class DetailResponse(
 data class DetailResult(
     var productIdx : Int,
     var productImgURL : String,
+    var subProductImgURL : List<String>,
+    var productImgURLlist : List<String>,
     var price : Int,
     var pay : Int,
     var productName : String,

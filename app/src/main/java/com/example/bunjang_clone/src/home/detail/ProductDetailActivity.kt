@@ -6,19 +6,20 @@ import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityProductDetailBinding
-import com.example.bunjang_clone.src.home.adapter.AdSliderAdapter
 import com.example.bunjang_clone.src.home.detail.models.DetailResponse
 import com.example.bunjang_clone.src.home.detail.models.DetailResult
-import com.example.bunjang_clone.src.home.models.RecommendItem
 import java.text.DecimalFormat
 
-class ProductDetailActivity() :
-    BaseActivity<ActivityProductDetailBinding>(ActivityProductDetailBinding::inflate),
-    DetailActivityInterface {
+class ProductDetailActivity() : BaseActivity<ActivityProductDetailBinding>(ActivityProductDetailBinding::inflate), DetailActivityInterface {
 
     var productIdx = 0
+    private var prdouctPageCnt = 0
 
-//    private lateinit var imgSliderAdapter: ProductSliderAdapter
+    private lateinit var tagAdapter : DetailTagAdapter
+
+    private lateinit var imgAdapter : ProductSliderAdapter
+
+    var vpImgSlider = mutableListOf<String>()
 
     private lateinit var items: DetailResult
     val priceFormat = DecimalFormat("#,###")
@@ -71,8 +72,25 @@ class ProductDetailActivity() :
         binding.tvProductExplain3.text = items.shippingFee
         binding.tvProductExplain4.text = items.exchange
         binding.tvProductTitleExplain.text = items.productExplaination
-        binding.tvProductTag1.text = items.hashtag[0]
-        binding.tvProductTag2.text = items.hashtag[1]
+
+        var detailTag = items.hashtag.toMutableList()
+        Log.d("detailTag", "$detailTag")
+        tagAdapter = DetailTagAdapter(detailTag)
+        binding.rvDetailTag.adapter = tagAdapter
+
+        var imgList = items.productImgURLlist.toMutableList()
+        imgAdapter = ProductSliderAdapter(imgList)
+        binding.vpProduct.adapter = imgAdapter
+
+        binding.vpProduct.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                binding.tvProductPage.text = "${binding.vpProduct.currentItem + 1}/${imgList.size}"
+
+                prdouctPageCnt = binding.vpProduct.currentItem
+                super.onPageSelected(position)
+            }
+        })
+
     }
 
     override fun onGetDetailDataFail(message: String) {
