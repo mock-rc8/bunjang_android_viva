@@ -34,6 +34,8 @@
             android:exported="false"/>
         <activity android:name=".src.home.detail.ProductDetailActivity"
             android:exported="false"/>
+        <activity android:name=".src.home.detail.DeliveryBuyActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

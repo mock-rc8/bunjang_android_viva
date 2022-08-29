@@ -1,9 +1,11 @@
 package com.example.bunjang_clone.src.home.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
@@ -115,6 +117,12 @@ class ProductDetailActivity() : BaseActivity<ActivityProductDetailBinding>(Activ
                         chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setBackgroundColor(R.drawable.btn_product_event)
                         delivery = true
                         deliverybtn = true
+                    }
+                }
+                chargeView.findViewById<AppCompatButton>(R.id.btn_detail_product_buy_next).setOnClickListener {
+                    if (delivery) {
+                        startActivity(Intent(this, DeliveryBuyActivity::class.java))
+                        chargeDialog.dismiss()
                     }
                 }
             }
