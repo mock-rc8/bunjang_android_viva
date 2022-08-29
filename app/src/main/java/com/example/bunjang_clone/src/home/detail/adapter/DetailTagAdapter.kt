@@ -1,4 +1,4 @@
-package com.example.bunjang_clone.src.home.detail
+package com.example.bunjang_clone.src.home.detail.adapter
 
 import android.util.Log
 import android.view.LayoutInflater

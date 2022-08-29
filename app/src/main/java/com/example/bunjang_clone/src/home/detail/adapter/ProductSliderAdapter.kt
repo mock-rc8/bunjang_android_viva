@@ -1,13 +1,10 @@
-package com.example.bunjang_clone.src.home.detail
+package com.example.bunjang_clone.src.home.detail.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bunjang_clone.databinding.ItemProductImgSliderBinding
-import com.example.bunjang_clone.src.home.detail.models.DetailResponse
-import com.example.bunjang_clone.src.home.detail.models.DetailResult
-import com.example.bunjang_clone.src.home.models.RecommendItem
 
 class ProductSliderAdapter(item: MutableList<String>) : RecyclerView.Adapter<ProductSliderAdapter.ImgViewHolder>() {
 

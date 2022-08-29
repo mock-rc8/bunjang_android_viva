@@ -7,11 +7,13 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityProductDetailBinding
+import com.example.bunjang_clone.src.home.detail.adapter.DetailTagAdapter
+import com.example.bunjang_clone.src.home.detail.adapter.ProductSliderAdapter
+import com.example.bunjang_clone.src.home.detail.buy.DeliveryBuyActivity
 import com.example.bunjang_clone.src.home.detail.models.DetailResponse
 import com.example.bunjang_clone.src.home.detail.models.DetailResult
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -109,19 +111,22 @@ class ProductDetailActivity() : BaseActivity<ActivityProductDetailBinding>(Activ
                 chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setOnClickListener {
                     if (delivery) {
                         chargeView.findViewById<ImageView>(R.id.iv_product_deal_click).setImageResource(R.drawable.icon_radio_unclick)
-                        chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setBackgroundColor(R.drawable.btn_product_red)
+//                        chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setBackgroundColor(R.drawable.btn_product_red)
                         delivery = false
                         deliverybtn = false
                     } else {
                         chargeView.findViewById<ImageView>(R.id.iv_product_deal_click).setImageResource(R.drawable.icon_radio_click)
-                        chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setBackgroundColor(R.drawable.btn_product_event)
+//                        chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setBackgroundColor(R.drawable.btn_product_event)
                         delivery = true
                         deliverybtn = true
                     }
                 }
                 chargeView.findViewById<AppCompatButton>(R.id.btn_detail_product_buy_next).setOnClickListener {
                     if (delivery) {
-                        startActivity(Intent(this, DeliveryBuyActivity::class.java))
+                        var intent = Intent(this, DeliveryBuyActivity::class.java)
+                        intent.putExtra("productBuyIdx", productIdx)
+                        Log.d("productBuyIdx", "$productIdx")
+                        startActivity(intent)
                         chargeDialog.dismiss()
                     }
                 }

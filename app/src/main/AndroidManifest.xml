@@ -34,7 +34,7 @@
             android:exported="false"/>
         <activity android:name=".src.home.detail.ProductDetailActivity"
             android:exported="false"/>
-        <activity android:name=".src.home.detail.DeliveryBuyActivity"
+        <activity android:name=".src.home.detail.buy.DeliveryBuyActivity"
             android:exported="false"/>
     </application>
 
