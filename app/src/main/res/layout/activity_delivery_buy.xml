@@ -77,10 +77,13 @@
                 app:layout_constraintTop_toTopOf="@id/iv_buy_product" />
 
             <TextView
+                android:id="@+id/tv_buy_product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="여기에는 상품제목"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/light_gray"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_buy_product"
@@ -114,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/btn_product_event"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_buy_where"
@@ -278,6 +282,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_buy_point_title">
 
                 <EditText
+                    android:id="@+id/et_product_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -293,6 +298,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_buy_use_all_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

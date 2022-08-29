@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bunjang_clone.R
@@ -11,12 +12,15 @@ import com.example.bunjang_clone.config.BaseFragment
 import com.example.bunjang_clone.databinding.FragmentHomeBinding
 import com.example.bunjang_clone.src.home.adapter.AdSliderAdapter
 import com.example.bunjang_clone.src.home.adapter.HomeVpAdapter
+import com.example.bunjang_clone.src.home.detail.buy.models.BuyResult
+import com.example.bunjang_clone.src.home.models.ShopNameResponse
+import com.example.bunjang_clone.src.home.models.ShopResult
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.math.abs
 import kotlin.math.min
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home), ShopNameActivityInterface {
 
     private var adViewThred = true
 
@@ -25,6 +29,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
     private lateinit var adSliderAdapter: AdSliderAdapter
 
     private var adPageCnt = 0
+
+    private lateinit var items: ShopResult
     
     private val information = arrayListOf("추천상품", "브랜드\uD83D\uDD34")
 
@@ -33,6 +39,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        getShopName()
 
         // 광고 
         adViewPage()
@@ -54,6 +62,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
             }
         })
 
+    }
+
+    private fun getShopName() {
+        ShopNameService(this).shopNameData()
     }
 
     private fun productAdapter() {
@@ -98,5 +110,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         super.onDestroy()
 
         adViewThred = false
+    }
+
+    override fun onShopNameSuccess(response: ShopNameResponse) {
+        items = response.result
+        binding.tvHomeIdTitle.text = "전국에서 갓 올라온\n${response.result.storeName}의 취향"
+        Log.d("shopname", "${response.result.storeName}")
+    }
+
+    override fun onShopNameFail(message: String) {
     }
 }

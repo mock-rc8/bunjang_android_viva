@@ -1,11 +1,11 @@
 package com.example.bunjang_clone.src.home.detail.buy
 
-import com.example.bunjang_clone.src.home.detail.models.DetailResponse
+import com.example.bunjang_clone.src.home.detail.buy.models.BuyResponse
 
 interface BuyActivityInterface {
 
-    fun onGetDetailDataSuccess(response : DetailResponse)
+    fun onGetBuyDataSuccess(response : BuyResponse)
 
-    fun onGetDetailDataFail(message : String)
+    fun onGetBuyDataFail(message : String)
 
 }

@@ -2,22 +2,24 @@ package com.example.bunjang_clone.src.home.detail.buy
 
 import android.util.Log
 import com.example.bunjang_clone.config.ApplicationClass
+import com.example.bunjang_clone.src.home.detail.buy.models.BuyResponse
 import com.example.bunjang_clone.src.home.detail.models.DetailResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class BuyService(val detailActivityInterface : DetailActivityInterface) {
+class BuyService(val buyActivityInterface : BuyActivityInterface) {
 
-    fun detailGetData(productIdx: Int) {
-        val detailRetrofitInterface = ApplicationClass.sRetrofit.create(DetailRetrofitInterface::class.java)
-        detailRetrofitInterface.getDetail(productIdx).enqueue(object : Callback<DetailResponse> {
-                override fun onResponse(call: Call<DetailResponse>, response: Response<DetailResponse>) {
-                    detailActivityInterface.onGetDetailDataSuccess(response.body() as DetailResponse)
-                }
-                override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                    detailActivityInterface.onGetDetailDataFail(t.message ?: "통신 오류")
-                }
-            })
+    fun buyGetData(productIdx: Int) {
+        val buyRetrofitInterface = ApplicationClass.sRetrofit.create(BuyRetrofitInterface::class.java)
+        buyRetrofitInterface.getBuy(productIdx).enqueue(object : Callback<BuyResponse> {
+            override fun onResponse(call: Call<BuyResponse>, response: Response<BuyResponse>) {
+                buyActivityInterface.onGetBuyDataSuccess(response.body() as BuyResponse)
+            }
+            override fun onFailure(call: Call<BuyResponse>, t: Throwable) {
+                buyActivityInterface.onGetBuyDataFail(t.message ?: "통신오류")
+            }
+
+        })
     }
 }

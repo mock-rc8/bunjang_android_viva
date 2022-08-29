@@ -111,12 +111,12 @@ class ProductDetailActivity() : BaseActivity<ActivityProductDetailBinding>(Activ
                 chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setOnClickListener {
                     if (delivery) {
                         chargeView.findViewById<ImageView>(R.id.iv_product_deal_click).setImageResource(R.drawable.icon_radio_unclick)
-//                        chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setBackgroundColor(R.drawable.btn_product_red)
+                        chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setBackgroundResource(R.drawable.btn_product_red)
                         delivery = false
                         deliverybtn = false
                     } else {
                         chargeView.findViewById<ImageView>(R.id.iv_product_deal_click).setImageResource(R.drawable.icon_radio_click)
-//                        chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setBackgroundColor(R.drawable.btn_product_event)
+                        chargeView.findViewById<ConstraintLayout>(R.id.cl_product_delivery).setBackgroundResource(R.drawable.btn_product_event)
                         delivery = true
                         deliverybtn = true
                     }
