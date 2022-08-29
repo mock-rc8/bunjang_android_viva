@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseFragment

@@ -1,6 +1,5 @@
 package com.example.bunjang_clone.src
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.bunjang_clone.R

@@ -1,7 +1,5 @@
 package com.example.bunjang_clone.src.home.models
 
-import com.example.bunjang_clone.src.login.models.LoginResult
-
 data class RecommendResponse(
     var isSuccess : Boolean,
     var code : Int,

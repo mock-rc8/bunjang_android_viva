@@ -6,7 +6,6 @@ import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseFragment
 import com.example.bunjang_clone.databinding.FragmentRecommendpdBinding
 import com.example.bunjang_clone.src.home.adapter.RecommendPdRvAdapter
-import com.example.bunjang_clone.src.home.models.RecommendItem
 import com.example.bunjang_clone.src.home.models.RecommendResponse
 
 class RecommendPdFragment : BaseFragment<FragmentRecommendpdBinding>(FragmentRecommendpdBinding::bind, R.layout.fragment_recommendpd), RecommendActivityInterface {
