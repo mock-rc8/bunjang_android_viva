@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bunjang_clone.databinding.ItemHomeAdSliderBinding
 
-class AdSliderAdapter(adViewList: ArrayList<Int>) : RecyclerView.Adapter<AdSliderAdapter.AdViewHolder>() {
+class AdSliderAdapter(item: MutableList<String>) : RecyclerView.Adapter<AdSliderAdapter.AdViewHolder>() {
 
-    private val itemList = adViewList
+    private val itemList = item
 
     inner class AdViewHolder(val binding: ItemHomeAdSliderBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Int){
+        fun bind(item: String){
             Glide.with(binding.root.context)
                 .load(item)
                 .into(binding.itemAdSlider)
