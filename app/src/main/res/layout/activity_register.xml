@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_register_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_register_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/register_top_title"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_register_toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_register_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/img_register_pictrue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_register_upload_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_register_img_upload"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@id/iv_register_picture"
+                app:layout_constraintStart_toEndOf="@id/iv_register_picture"
+                app:layout_constraintTop_toTopOf="@id/iv_register_picture" />
+
+            <EditText
+                android:id="@+id/et_register_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@null"
+                android:hint="상품명"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_register_picture" />
+
+            <View
+                android:id="@+id/view_product_name_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/more_light_gray"
+                app:layout_constraintTop_toBottomOf="@id/et_register_product_name" />
+
+            <EditText
+                android:id="@+id/et_register_product_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@null"
+                android:hint="카테고리"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_product_name_line" />
+
+            <View
+                android:id="@+id/view_product_categories_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/more_light_gray"
+                app:layout_constraintTop_toBottomOf="@id/et_register_product_categories" />
+
+            <EditText
+                android:id="@+id/et_register_product_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@null"
+                android:drawableStart="@drawable/icon_register_untags"
+                android:drawablePadding="5dp"
+                android:hint="태그"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_product_categories_line" />
+
+            <View
+                android:id="@+id/view_product_tags_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/more_light_gray"
+                app:layout_constraintTop_toBottomOf="@id/et_register_product_tags" />
+
+            <EditText
+                android:id="@+id/et_register_product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@null"
+                android:drawableStart="@drawable/icon_register_uncharge"
+                android:drawablePadding="5dp"
+                android:hint="가격"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_product_tags_line" />
+
+            <View
+                android:id="@+id/view_product_price_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/more_light_gray"
+                app:layout_constraintTop_toBottomOf="@id/et_register_product_price" />
+
+
+            <ImageView
+                android:id="@+id/iv_register_delivery_btn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/icon_all_unagree"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_register_delivery_title"
+                app:layout_constraintEnd_toStartOf="@+id/tv_register_delivery_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_register_delivery_title" />
+
+            <TextView
+                android:id="@+id/tv_register_delivery_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="배송비포함"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/et_register_product_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/et_register_product_price" />
+
+            <TextView
+                android:id="@+id/tv_register_choice_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_product_event"
+                android:clickable="true"
+                android:padding="10dp"
+                android:text="옵션선택"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_product_price_line" />
+
+            <TextView
+                android:id="@+id/tv_register_options"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:text="1개 • 새상품 • 교환가능"
+                android:textColor="@color/gray"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tv_register_choice_option"
+                app:layout_constraintStart_toEndOf="@id/tv_register_choice_option"
+                app:layout_constraintTop_toTopOf="@id/tv_register_choice_option" />
+
+            <EditText
+                android:id="@+id/et_register_product_detail_explain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="여러 장의 상품 사진, 구입 연도, 브랜드, 사용감, 하자 유무 등\n구매자에게 필요한 정보를 포함해 주세요. (10자 이상)\n안전하고 건전한 거래 환경을 위해 과학기술정보통신부, \n한국인터넷진흥원과 번개장터(즈)가 합께 합니다."
+                android:minHeight="250dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_register_choice_option"
+                app:layout_constraintTop_toBottomOf="@id/tv_register_options" />
+
+            <View
+                android:id="@+id/view_product_detail_explain_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/more_light_gray"
+                app:layout_constraintTop_toBottomOf="@id/et_register_product_detail_explain" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_register_safe_pay"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/btn_product_red"
+                app:layout_constraintEnd_toStartOf="@id/bnt_register_up"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_product_detail_explain_line">
+
+                <TextView
+                    android:id="@+id/tv_register_safe_charge_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="안전결제 환영"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_register_pay_img"
+                    android:layout_width="35dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/icon_item_home_pay"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_register_safe_charge_title"
+                    app:layout_constraintStart_toEndOf="@id/tv_register_safe_charge_title"
+                    app:layout_constraintTop_toTopOf="@id/tv_register_safe_charge_title" />
+
+                <ImageView
+                    android:id="@+id/iv_register_pay_check"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/icon_pay_check"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_register_safe_charge_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_register_safe_charge_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bnt_register_up"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/login_color_red"
+                android:text="등록"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_register_safe_pay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cl_register_safe_pay" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_register_safe_pay">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="빠르게 팔고 싶으면 안전결제 환영을 이용하세요!"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@id/cl_register_safe_pay" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register_detail"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@id/cl_register_safe_pay" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
