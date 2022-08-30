@@ -30,6 +30,7 @@
 
     // register activity
     <string name="register_top_title"><u>직거래시 가능 지역</u></string>
+    <string name="register_detail"><u>자세히</u></string>
 
 
 </resources>
