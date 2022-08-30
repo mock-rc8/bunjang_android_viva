@@ -1,5 +1,6 @@
 package com.example.bunjang_clone.src.home.detail.buy
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -17,6 +18,11 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
     var productIdx = 0
     var point = 0
 
+    var allCommission = 0
+    var commission = 0
+    var payment = 0
+    var finalPayment = 0
+
     private lateinit var items: BuyResult
 
     val priceFormat = DecimalFormat("#,###")
@@ -28,7 +34,7 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
         Log.d("productid","$productIdx")
         getBuyData(productIdx)
 
-
+        binding.tvBuyChargeTaxWon.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
     }
 
     private fun getBuyData(productIdx: Int) {
