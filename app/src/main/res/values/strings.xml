@@ -28,5 +28,8 @@
     <string name="buy_today_event_more"><u>더보기</u></string>
     <string name="buy_agree_detail"><u>자세히 보기</u></string>
 
+    // register activity
+    <string name="register_top_title"><u>직거래시 가능 지역</u></string>
+
 
 </resources>

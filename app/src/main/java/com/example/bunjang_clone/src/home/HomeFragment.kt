@@ -1,11 +1,14 @@
 package com.example.bunjang_clone.src.home
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseFragment

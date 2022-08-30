@@ -13,5 +13,5 @@ data class BuyResult(
     var productName : String,
     var shippingFee : String,
     var point : Int,
-    var commission : String
+    var commission : Int
 )

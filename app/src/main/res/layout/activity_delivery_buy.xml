@@ -235,6 +235,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cl_product_where">
 
                 <TextView
+                    android:id="@+id/tv_buy_shipping_options"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
