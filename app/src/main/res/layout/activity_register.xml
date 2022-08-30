@@ -259,7 +259,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/btn_product_red"
+                android:clickable="true"
+                android:background="@drawable/btn_product_event"
                 app:layout_constraintEnd_toStartOf="@id/bnt_register_up"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view_product_detail_explain_line">
@@ -270,7 +271,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:text="안전결제 환영"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -291,7 +292,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="20dp"
-                    android:src="@drawable/icon_pay_check"
+                    android:src="@drawable/icon_pay_uncheck"
                     app:layout_constraintBottom_toBottomOf="@id/tv_register_safe_charge_title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_register_safe_charge_title" />
