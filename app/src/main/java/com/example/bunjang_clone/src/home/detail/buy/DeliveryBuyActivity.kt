@@ -31,6 +31,8 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
     var payment = 0
     var finalPayment = 0
 
+    var agree = false
+
     private lateinit var items: BuyResult
 
     var ChoiceList = ArrayList<shippingAgree>()
@@ -49,6 +51,10 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
         shippingDialog()
 
         binding.tvBuyChargeTaxWon.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+
+        binding.ivBuyAgreeBtn.setOnClickListener {
+
+        }
     }
 
     private fun getBuyData(productIdx: Int) {

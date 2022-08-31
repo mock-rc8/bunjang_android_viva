@@ -18,6 +18,7 @@
         <ImageView
             android:id="@+id/item_img_upload"
             android:layout_width="match_parent"
+            android:src="@drawable/img_home_ad3"
             android:background="@android:color/transparent"
             android:layout_height="match_parent" />
 
