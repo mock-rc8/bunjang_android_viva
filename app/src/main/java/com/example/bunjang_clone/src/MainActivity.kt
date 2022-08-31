@@ -3,6 +3,7 @@ package com.example.bunjang_clone.src
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
@@ -19,6 +20,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var userId = intent.getIntExtra("userIdx", 0)
+        Log.d("userIdx","$userId")
+
         supportFragmentManager.beginTransaction().add(R.id.fl_main_page, HomeFragment()).commit()
 
         binding.mainBtnNav.setOnItemSelectedListener {
@@ -34,7 +38,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                         .commit()
                 }
                 R.id.main_nav_register -> {
-                    startActivity(Intent(this, RegisterActivity::class.java))
+                    var intent = Intent(this, RegisterActivity::class.java)
+                    intent.putExtra("userIdx", userId)
+                    startActivity(intent)
                     return@setOnItemSelectedListener false
                 }
                 R.id.main_nav_talk -> {

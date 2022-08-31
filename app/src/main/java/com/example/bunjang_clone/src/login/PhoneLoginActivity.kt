@@ -381,7 +381,9 @@ class PhoneLoginActivity :
             Log.d("jwt확인", "SingUp : ${response.result.jwt}")
             ApplicationClass.sSharedPreferences.edit().putString("X-ACCESS-TOKEN", response.result.jwt).apply()
             Log.d("jwt확인", "SingUp : ${response.code}")
-            startActivity(Intent(this, MainActivity::class.java))
+            var intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("userIdx", response.result.id)
+            startActivity(intent)
             finish()
         }
     }
@@ -394,7 +396,10 @@ class PhoneLoginActivity :
             Log.d("jwt확인", "SingUp : ${response.result.jwt}")
             ApplicationClass.sSharedPreferences.edit().putString("X-ACCESS-TOKEN", response.result.jwt).apply()
             Log.d("jwt확인", "SingUp : ${response.code}")
-            startActivity(Intent(this, MainActivity::class.java))
+            var intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("userIdx", response.result.userIdx)
+            Log.d("userIdx", "${response.result.userIdx}")
+            startActivity(intent)
             finish()
         } else {
             if (response.code == 2021)
