@@ -2,6 +2,9 @@ package com.example.bunjang_clone.config
 
 import android.app.Application
 import android.content.SharedPreferences
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,6 +20,8 @@ class ApplicationClass : Application() {
         // 만들어져있는 SharedPreferences 를 사용해야합니다. 재생성하지 않도록 유념해주세요
         lateinit var sSharedPreferences: SharedPreferences
 
+        lateinit var fbStorage : StorageReference
+
         // JWT Token Header 키 값
         val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
 
@@ -28,6 +33,7 @@ class ApplicationClass : Application() {
     override fun onCreate() {
         super.onCreate()
         sSharedPreferences = applicationContext.getSharedPreferences("X-ACCESS-TOKEN", MODE_PRIVATE)
+        fbStorage = FirebaseStorage.getInstance().reference
 
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()

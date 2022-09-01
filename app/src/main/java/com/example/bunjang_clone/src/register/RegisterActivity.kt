@@ -8,14 +8,19 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.example.bunjang_clone.R
+import com.example.bunjang_clone.config.ApplicationClass
+import com.example.bunjang_clone.config.ApplicationClass.Companion.fbStorage
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityRegisterBinding
-import com.example.bunjang_clone.src.home.detail.adapter.DetailTagAdapter
+import com.example.bunjang_clone.src.MainActivity
+import com.example.bunjang_clone.src.register.models.CategoryData
 import com.example.bunjang_clone.src.register.models.RegisterData
 import com.example.bunjang_clone.src.register.models.RegisterResponse
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterBinding::inflate), RegisterActivityInterface, OptionDialogFragment.OnDataOption,
-AreaFragment.OnDataArea{
+AreaFragment.OnDataArea, CategoryFragment.OnDataCategory{
 
     lateinit var ImageUri : Uri
 
@@ -25,11 +30,22 @@ AreaFragment.OnDataArea{
 
     var myArea = ""
 
+    var mainCategory =""
+    var subCategory =""
+
     var delivery = false
     var isPay = false
 
+    var fileName = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        var mainimg = "https://user-images.githubusercontent.com/96619472/187862924-6c25bd08-0095-4d87-86c7-1703f1472e76.jpg"
+        var subimglist = listOf(
+            "https://user-images.githubusercontent.com/96619472/187862934-7f418924-2c45-4c27-9d64-e73175c3164a.jpg",
+            "https://user-images.githubusercontent.com/96619472/187862951-cd4bbe9f-aecd-4a35-b9f2-ae626b17ea13.jpg"
+        )
 
         setRv()
 
@@ -62,6 +78,11 @@ AreaFragment.OnDataArea{
             }
         }
 
+        binding.tvRegisterProductCategories.setOnClickListener {
+            val categoryFragment = CategoryFragment(mainCategory)
+            categoryFragment.show(supportFragmentManager, categoryFragment.tag)
+        }
+
         binding.tvRegisterChoiceOption.setOnClickListener {
             val optionFragment = OptionDialogFragment(itemCnt, itemStatus, itemexchange)
             optionFragment.show(supportFragmentManager, optionFragment.tag)
@@ -83,23 +104,40 @@ AreaFragment.OnDataArea{
             var amount = itemCnt
             var status = if (itemStatus) "새상품" else "중고상품"
             var change = if (itemexchange) "교환상품" else "교환불가능"
-            var imageURL = ImageUri
-
+            var imageUrl = mainimg
+            var subimgUrl = subimglist
+            var mainCategory = mainCategory
+            var subCategory = "방송/예능/캐릭터"
             var areaAddress = myArea
 
-            Log.d("productRegister","$userId,$productName,$imageURL, $hashtag,$productPrice,$productExplain,$shopping,$pay,$amount,$status,$change, ")
+            Log.d("productRegister","$userId,$productName,$imageUrl,$subimgUrl,$areaAddress,$mainCategory, $subCategory, $hashtag," +
+                    "$productPrice,$productExplain,$shopping,$pay,$amount,$status,$change")
 
-//            postProductItem(RegisterData(userIdx = userId, productsName = productName, imageURL= , subImageURL= , address= , mainCategory= , subCategory= ,
-//                hashtagText= hashtag, price= productPrice, shoppingFee= shopping, quantity= amount, productStatus= status, exchange= change,
-//                productExplaination= productExplain, pay= pay))
+            postProductItem(RegisterData(userIdx = userId, productsName = productName, imageURL= imageUrl, subImageURL= subimgUrl, address= areaAddress,
+                mainCategory= mainCategory, subCategory= subCategory, hashtagText= hashtag, price= productPrice, shoppingFee= shopping, quantity= amount,
+                productStatus= status, exchange= change, productExplaination= productExplain, pay= pay))
         }
     }
-//    fun postProductItem(registerData: RegisterData) {
-//        RegisterService(this).tryRegisterData(registerData)
-//    }
+    fun postProductItem(registerData: RegisterData) {
+        RegisterService(this).tryRegisterData(registerData)
+    }
+
+    fun setUploadImage() {
+        val storageReference = fbStorage.child("image")
+
+        storageReference.putFile(ImageUri).addOnCompleteListener{
+            if (it.isSuccessful){
+                storageReference.child("image").downloadUrl.addOnSuccessListener {
+                    val imageurl = it
+                    Log.d("imageurl","$imageurl")
+                }
+            }
+        }
+
+    }
 
     fun setRv() {
-        binding.ivRegisterPicture.setOnClickListener {
+        binding.itemImgUpload.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -122,9 +160,30 @@ AreaFragment.OnDataArea{
     }
 
     override fun onRegisterSuccess(response: RegisterResponse) {
+        if (response.isSuccess) {
+            var intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onRegisterFail(message: String) {
+    }
+
+    override fun onMainCategorySuccess(response: CategoryData) {
+
+    }
+
+    override fun onMainCategoryFail(message: String) {
+
+    }
+
+    override fun onSubCategorySuccess(response: CategoryData) {
+
+    }
+
+    override fun onSubCategoryFail(message: String) {
+
     }
 
     override fun onDataOption(itemCnt: Int, itemStatus: Boolean, itemexchange: Boolean) {
@@ -145,4 +204,11 @@ AreaFragment.OnDataArea{
 
         binding.tvDealArea.text = myArea
     }
+
+    override fun onDataCategory(mainCategory: String) {
+        this.mainCategory = mainCategory
+
+        binding.tvRegisterProductCategories.text = mainCategory
+    }
+
 }

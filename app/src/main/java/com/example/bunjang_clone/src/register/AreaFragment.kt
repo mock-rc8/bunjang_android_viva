@@ -57,6 +57,7 @@ class AreaFragment(var myArea: String): BottomSheetDialogFragment() {
     interface OnDataArea {
         fun onDataOption(myArea: String)
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog: Dialog = super.onCreateDialog(savedInstanceState)
         dialog.setOnShowListener {
