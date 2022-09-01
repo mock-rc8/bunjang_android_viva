@@ -162,6 +162,7 @@ AreaFragment.OnDataArea, CategoryFragment.OnDataCategory{
     override fun onRegisterSuccess(response: RegisterResponse) {
         if (response.isSuccess) {
             var intent = Intent(this, MainActivity::class.java)
+            Toast.makeText(this, "등록 성공", Toast.LENGTH_SHORT).show()
             startActivity(intent)
             finish()
         }

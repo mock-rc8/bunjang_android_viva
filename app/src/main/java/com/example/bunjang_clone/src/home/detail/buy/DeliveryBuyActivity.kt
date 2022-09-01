@@ -1,22 +1,20 @@
 package com.example.bunjang_clone.src.home.detail.buy
 
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import androidx.core.widget.addTextChangedListener
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityDeliveryBuyBinding
-import com.example.bunjang_clone.src.home.detail.buy.models.BuyResponse
-import com.example.bunjang_clone.src.home.detail.buy.models.BuyResult
-import com.example.bunjang_clone.src.home.detail.buy.models.shippingAgree
-import com.example.bunjang_clone.src.login.adapter.LoginAgencyRvAdapter
-import com.example.bunjang_clone.src.login.models.LoginAgreeData
+import com.example.bunjang_clone.src.MainActivity
+import com.example.bunjang_clone.src.home.detail.buy.models.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.text.DecimalFormat
 
@@ -31,7 +29,15 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
     var payment = 0
     var finalPayment = 0
 
+    // 배송지 요청사항
+    var shippi = false
+    
+    // 개인정보 동의
     var agree = false
+
+    var myuser = 0
+
+    var paymentStatus = false
 
     private lateinit var items: BuyResult
 
@@ -44,6 +50,8 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        getUserData()
+
         productIdx = intent.getIntExtra("productBuyIdx", 0)
         Log.d("productid","$productIdx")
         getBuyData(productIdx)
@@ -52,9 +60,53 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
 
         binding.tvBuyChargeTaxWon.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
+//        binding.tvBuyRegistration.setOnClickListener {
+//            val addressDialogFragment = AddressFragment()
+//            addressDialogFragment.show(supportFragmentManager, addressDialogFragment.tag)
+//        }
+
+        binding.ivBuySimplePayment.setOnClickListener {
+            paymentStatus = false
+            binding.ivBuySimplePayment.setImageResource(R.drawable.icon_radio_click)
+
+            binding.ivBuyOtherPayment.setImageResource(R.drawable.icon_radio_unclick)
+        }
+
+        binding.ivBuyOtherPayment.setOnClickListener {
+            paymentStatus = true
+            binding.ivBuySimplePayment.setImageResource(R.drawable.icon_radio_unclick)
+
+            binding.ivBuyOtherPayment.setImageResource(R.drawable.icon_radio_click)
+        }
+
+
         binding.ivBuyAgreeBtn.setOnClickListener {
+            if (agree) {
+                binding.ivBuyAgreeBtn.setImageResource(R.drawable.icon_all_unagree)
+                agree = false
+            } else {
+                binding.ivBuyAgreeBtn.setImageResource(R.drawable.icon_all_agree)
+                agree = true
+            }
 
         }
+
+        binding.btnProductBuy.setOnClickListener {
+
+            var transaction = "택배결제"
+            var require = binding.tvBuyShippingOptions.text.toString()
+            var point = binding.etBuyProductPoint.text.toString()
+            var paymentMe = if(!paymentStatus) "번개장터 간편결제" else "다른 결제수단"
+
+            Log.d("btnProductBuy", "$myuser, $productIdx, $transaction,$point, $require, $finalPayment, $paymentMe, $commission")
+            postPaymentProduct(PaymentData(userIdx = myuser, productIdx = productIdx, transactionMethod = transaction, requirement = require,
+            commissionPrice = commission, usePoint = point.toInt(), finalPrice = finalPayment, paymentMethod = paymentMe))
+        }
+
+
+    }
+    fun postPaymentProduct(paymentData: PaymentData) {
+        BuyService(this).postPayment(paymentData)
     }
 
     private fun getBuyData(productIdx: Int) {
@@ -92,9 +144,14 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
                 shippingAdapter.itemList[position].isCheck = true
                 shippingAdapter.notifyDataSetChanged()
                 shippingOptionDialog.dismiss()
+                shippi = true
             }
 
         })
+    }
+
+    fun getUserData() {
+        BuyService(this).getUserIdx()
     }
 
 
@@ -130,7 +187,7 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
         finalPayment = payment - point
         binding.tvBuyFinalPricePrice.text = finalPayment.toString()
 
-        binding.etProductPoint.addTextChangedListener(object : TextWatcher {
+        binding.etBuyProductPoint.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -139,11 +196,11 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (binding.etProductPoint.text.toString() =="") {
+                if (binding.etBuyProductPoint.text.toString() =="") {
                     point = 0
                     binding.tvBuyLightningPointPrice.text = "0원"
                 } else {
-                    point = binding.etProductPoint.text.toString().toInt()
+                    point = binding.etBuyProductPoint.text.toString().toInt()
                     binding.tvBuyLightningPointPrice.text = "-" + priceFormat.format(point) + "원"
                     finalPayment = payment - point
                     binding.tvBuyFinalPricePrice.text = finalPayment.toString()
@@ -152,9 +209,28 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
 
         })
 
-
     }
 
     override fun onGetBuyDataFail(message: String) {
+    }
+
+    override fun onPaymentSuccess(response: PaymentResponse) {
+        if (response.isSuccess) {
+            var intent = Intent(this, MainActivity::class.java)
+            Toast.makeText(this, "결제 성공", Toast.LENGTH_SHORT).show()
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onPaymentFail(message: String) {
+
+    }
+
+    override fun onUserDataSuccess(response: UserIdx) {
+        myuser = response.result.userIdx
+    }
+
+    override fun onUserDataFail(message: String) {
     }
 }
