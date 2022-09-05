@@ -7,19 +7,14 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseFragment
 import com.example.bunjang_clone.databinding.FragmentHomeBinding
 import com.example.bunjang_clone.src.home.adapter.AdSliderAdapter
+import com.example.bunjang_clone.src.home.adapter.HomeCategoryRvAdapter
 import com.example.bunjang_clone.src.home.adapter.HomeVpAdapter
-import com.example.bunjang_clone.src.home.detail.buy.models.BuyResult
-import com.example.bunjang_clone.src.home.models.AdResult
-import com.example.bunjang_clone.src.home.models.HomeAdResponse
-import com.example.bunjang_clone.src.home.models.ShopNameResponse
-import com.example.bunjang_clone.src.home.models.ShopResult
+import com.example.bunjang_clone.src.home.models.*
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.math.abs
@@ -32,6 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
     private lateinit var adTread : Thread
 
     private lateinit var adSliderAdapter: AdSliderAdapter
+    private lateinit var homeCategoryAdapter : HomeCategoryRvAdapter
 
     private var adPageCnt = 0
 
@@ -49,6 +45,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         // 중간 추천상품, 브랜드
         productAdapter()
 
+        setCategory()
+
         binding.appbarHome.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val alpha = min(abs(verticalOffset / 3), 255)
             binding.toolbarHome.setBackgroundColor(Color.argb(alpha, 255, 255, 255))
@@ -62,6 +60,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
                 binding.ivHomeSearch.setColorFilter(Color.rgb(255,255,255))
             }
         })
+
+    }
+
+    private fun setCategory() {
+        val categorylist = mutableListOf<HomeCategoryData>()
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_zzim, "찜"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_apc, "아페세"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_lately, "최근본상품"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_sneakers, "스니커즈"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_feed, "내피드"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_camping, "캠핑"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_price, "내폰시세"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_bike, "자전거"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_village, "우리동네"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_star, "스타굿즈"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_friend, "친구초대"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_motorcycle, "오토바이/스..."))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_menu, "전체메뉴"))
+        categorylist.add(HomeCategoryData(R.drawable.icon_home_clock, "시계"))
+
+        homeCategoryAdapter = HomeCategoryRvAdapter(requireContext(), categorylist)
+        binding.rvHomeCategory.adapter = homeCategoryAdapter
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.rvHomeCategory.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                binding.hsvHomeIndicator.scrollX = ((binding.rvHomeCategory.computeHorizontalScrollOffset()/400.0)*200.0).toInt()
+            }
+        }
+
 
     }
 
