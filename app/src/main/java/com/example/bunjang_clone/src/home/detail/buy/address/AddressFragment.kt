@@ -1,7 +1,8 @@
-package com.example.bunjang_clone.src.home.detail.buy
+package com.example.bunjang_clone.src.home.detail.buy.address
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -24,7 +25,8 @@ class AddressFragment : BottomSheetDialogFragment() {
         binding = DialogAddressBinding.inflate(inflater, container, false)
 
         binding.ivDialogAddressAdd.setOnClickListener {
-
+            startActivity(Intent(requireActivity(), AddAddressActivity::class.java))
+            dialog?.dismiss()
         }
 
         return binding.root

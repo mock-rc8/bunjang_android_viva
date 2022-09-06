@@ -36,4 +36,10 @@
     <string name="register_detail"><u>자세히</u></string>
 
 
+    // address
+    <string name="add_address"><u>주소 추가</u></string>
+    <string name="item_address_delete"><u>삭제</u></string>
+    <string name="item_address_correct"><u>수정</u></string>
+
+
 </resources>

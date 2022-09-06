@@ -14,6 +14,7 @@ import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityDeliveryBuyBinding
 import com.example.bunjang_clone.src.MainActivity
+import com.example.bunjang_clone.src.home.detail.buy.address.AddressFragment
 import com.example.bunjang_clone.src.home.detail.buy.models.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.text.DecimalFormat
@@ -39,6 +40,16 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
 
     var paymentStatus = false
 
+    var addressName = ""
+    var addressMain = ""
+    var addressSub = ""
+    var addressPhone = ""
+
+    var addressLoacation = false
+
+    lateinit var addressView: View
+    lateinit var addressDialog: BottomSheetDialog
+
     private lateinit var items: BuyResult
 
     var ChoiceList = ArrayList<shippingAgree>()
@@ -58,12 +69,10 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
 
         shippingDialog()
 
+        bottomAddAddress()
+
         binding.tvBuyChargeTaxWon.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
-//        binding.tvBuyRegistration.setOnClickListener {
-//            val addressDialogFragment = AddressFragment()
-//            addressDialogFragment.show(supportFragmentManager, addressDialogFragment.tag)
-//        }
 
         binding.ivBuySimplePayment.setOnClickListener {
             paymentStatus = false
@@ -105,6 +114,18 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
 
 
     }
+    fun bottomAddAddress() {
+            addressView = layoutInflater.inflate(R.layout.dialog_address, null)
+            addressDialog = BottomSheetDialog(this)
+            addressDialog.setContentView(addressView)
+
+        binding.clProductWhere.setOnClickListener {
+            val addressDialogFragment = AddressFragment()
+            addressDialogFragment.show(supportFragmentManager, addressDialogFragment.tag)
+        }
+    }
+
+
     fun postPaymentProduct(paymentData: PaymentData) {
         BuyService(this).postPayment(paymentData)
     }

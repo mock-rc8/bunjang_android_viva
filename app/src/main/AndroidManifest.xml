@@ -40,6 +40,8 @@
             android:exported="false"/>
         <activity android:name=".src.register.RegisterActivity"
             android:exported="false"/>
+        <activity android:name=".src.home.detail.buy.address.AddAddressActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
