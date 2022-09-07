@@ -20,10 +20,7 @@ import com.example.bunjang_clone.src.home.detail.buy.address.AddAddressActivity
 import com.example.bunjang_clone.src.home.detail.buy.address.AddressActivityInterface
 import com.example.bunjang_clone.src.home.detail.buy.address.AddressFragment
 import com.example.bunjang_clone.src.home.detail.buy.address.AddressService
-import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressData
-import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressDialogRvAdapter
-import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressResponse
-import com.example.bunjang_clone.src.home.detail.buy.address.models.GetAddressData
+import com.example.bunjang_clone.src.home.detail.buy.address.models.*
 import com.example.bunjang_clone.src.home.detail.buy.models.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.text.DecimalFormat
@@ -314,12 +311,18 @@ class DeliveryBuyActivity() :
     override fun onGetAddressSuccess(response: GetAddressData) {
         if (response.code == 1000) {
             for (i in response.result.listIterator()){
-                dataList.add(AddressData(i.receiverName, i.receiverPhoneNum, i.address, i.detailAddress, false))
+                dataList.add(AddressData(i.receiverName, i.receiverPhoneNum, i.address, i.detailAddress, i.shippingIdx.toString()))
             }
             bottomAddAddress()
         }
     }
 
     override fun onGetAddressFail(message: String) {
+    }
+
+    override fun onPatchDeleteAddressSuccess(response: DeleteResponse) {
+    }
+
+    override fun onPatchDeleteAddressFail(message: String) {
     }
 }

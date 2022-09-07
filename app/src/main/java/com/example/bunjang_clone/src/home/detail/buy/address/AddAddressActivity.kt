@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.View
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityAddAddressBinding
-import com.example.bunjang_clone.src.home.detail.buy.address.models.AddAddressData
-import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressData
-import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressResponse
-import com.example.bunjang_clone.src.home.detail.buy.address.models.GetAddressData
+import com.example.bunjang_clone.src.home.detail.buy.address.models.*
 import com.example.bunjang_clone.src.login.models.LoginData
 
 class AddAddressActivity() : BaseActivity<ActivityAddAddressBinding>(ActivityAddAddressBinding::inflate), AddressActivityInterface {
@@ -107,12 +104,19 @@ class AddAddressActivity() : BaseActivity<ActivityAddAddressBinding>(ActivityAdd
     override fun onGetAddressSuccess(response: GetAddressData) {
         if (response.code == 1000) {
             for (i in response.result.listIterator()){
-                dataList.add(AddressData(i.receiverName, i.receiverPhoneNum, i.address, i.detailAddress, false))
+                var shippingIdx = i.shippingIdx.toString()
+                dataList.add(AddressData(i.receiverName, i.receiverPhoneNum, i.address, i.detailAddress, shippingIdx))
             }
             addressRv()
         }
     }
 
     override fun onGetAddressFail(message: String) {
+    }
+
+    override fun onPatchDeleteAddressSuccess(response: DeleteResponse) {
+    }
+
+    override fun onPatchDeleteAddressFail(message: String) {
     }
 }

@@ -1,9 +1,7 @@
 package com.example.bunjang_clone.src.home.detail.buy.address
 
 import com.example.bunjang_clone.config.ApplicationClass
-import com.example.bunjang_clone.src.home.detail.buy.address.models.AddAddressData
-import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressResponse
-import com.example.bunjang_clone.src.home.detail.buy.address.models.GetAddressData
+import com.example.bunjang_clone.src.home.detail.buy.address.models.*
 import com.example.bunjang_clone.src.home.detail.buy.models.BuyResponse
 import com.example.bunjang_clone.src.home.detail.buy.models.PaymentData
 import com.example.bunjang_clone.src.home.detail.buy.models.PaymentResponse
@@ -41,5 +39,18 @@ class AddressService(val addressActivityInterface : AddressActivityInterface) {
 
         })
     }
+    fun patchDeleteData(deleteAddressData: DeleteAddressData) {
+        val deleteAddressRetrofitInterface = ApplicationClass.sRetrofit.create(AddressRetrofitInterface::class.java)
+        deleteAddressRetrofitInterface.patchAddress(deleteAddressData).enqueue(object : Callback<DeleteResponse>{
+            override fun onResponse(call: Call<DeleteResponse>, response: Response<DeleteResponse>, ) {
+                addressActivityInterface.onPatchDeleteAddressSuccess(response.body() as DeleteResponse)
+            }
 
+            override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
+                addressActivityInterface.onPatchDeleteAddressFail(t.message ?: "통신오류")
+            }
+
+        })
+
+    }
 }

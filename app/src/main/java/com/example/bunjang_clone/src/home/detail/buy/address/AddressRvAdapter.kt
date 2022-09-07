@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bunjang_clone.databinding.ItemAddAddressBinding
 import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressData
 
-class AddressRvAdapter(context: Context, private val dataList : ArrayList<AddressData>) : RecyclerView.Adapter<AddressRvAdapter.AddressViewHolder>() {
+class AddressRvAdapter(private val context: Context, private val dataList : ArrayList<AddressData>) : RecyclerView.Adapter<AddressRvAdapter.AddressViewHolder>() {
 
     inner class AddressViewHolder(var binding: ItemAddAddressBinding) : RecyclerView.ViewHolder(binding.root) {
         fun find(item : AddressData) {
@@ -15,6 +15,11 @@ class AddressRvAdapter(context: Context, private val dataList : ArrayList<Addres
             binding.tvAddressPhoneNumber.text = item.phoneNumber
             binding.tvItemAddress.text = item.address
             binding.tvAddressDetail.text = item.addressDetail
+
+            binding.tvAddressDelete.setOnClickListener {
+                val dialog = DeleteAddressActivity(context, item.shippingIdx)
+                dialog.showDialog()
+            }
         }
 
     }

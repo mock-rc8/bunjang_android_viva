@@ -5,5 +5,5 @@ data class AddressData(
     var phoneNumber : String,
     var address : String,
     var addressDetail : String,
-    var isCheck : Boolean
+    var shippingIdx : String
 )
