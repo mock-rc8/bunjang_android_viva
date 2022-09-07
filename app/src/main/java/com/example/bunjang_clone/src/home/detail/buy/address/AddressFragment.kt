@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.bunjang_clone.databinding.DialogAddressBinding
+import com.example.bunjang_clone.src.home.detail.buy.DeliveryBuyActivity
 import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressData
 import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressDialogRvAdapter
 import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressResponse
@@ -17,7 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class AddressFragment : BottomSheetDialogFragment(), AddressActivityInterface {
+class AddressFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: DialogAddressBinding
 
@@ -29,14 +30,9 @@ class AddressFragment : BottomSheetDialogFragment(), AddressActivityInterface {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        AddressService(this).getAddressData()
 
         binding = DialogAddressBinding.inflate(inflater, container, false)
 
-        binding.ivDialogAddressAdd.setOnClickListener {
-            startActivity(Intent(requireActivity(), AddAddressActivity::class.java))
-            dialog?.dismiss()
-        }
 
         return binding.root
     }
@@ -68,37 +64,4 @@ class AddressFragment : BottomSheetDialogFragment(), AddressActivityInterface {
         return displayMetrics.heightPixels
     }
 
-    fun addressRv() {
-        addressDialogAdapter = AddressDialogRvAdapter(requireActivity(), dataList)
-        binding.rvDialogMyAddress.adapter = addressDialogAdapter
-
-        rvEmpty()
-    }
-    fun rvEmpty() {
-        if(addressDialogAdapter.itemCount == 0) {
-            binding.rvDialogMyAddress.visibility = View.GONE
-            binding.llDialogAddressEmpty.visibility = View.VISIBLE
-        } else {
-            binding.rvDialogMyAddress.visibility = View.VISIBLE
-            binding.llDialogAddressEmpty.visibility = View.GONE
-        }
-    }
-
-    override fun onPostAddressSuccess(response: AddressResponse) {
-    }
-
-    override fun onPostAddressFail(message: String) {
-    }
-
-    override fun onGetAddressSuccess(response: GetAddressData) {
-        if (response.code == 1000) {
-            for (i in response.result.listIterator()){
-                dataList.add(AddressData(i.receiverName, i.receiverPhoneNum, i.address, i.detailAddress))
-            }
-            addressRv()
-        }
-    }
-
-    override fun onGetAddressFail(message: String) {
-    }
 }

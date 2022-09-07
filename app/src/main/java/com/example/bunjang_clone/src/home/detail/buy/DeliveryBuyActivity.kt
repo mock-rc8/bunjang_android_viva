@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityDeliveryBuyBinding
 import com.example.bunjang_clone.src.MainActivity
+import com.example.bunjang_clone.src.home.detail.buy.address.AddAddressActivity
 import com.example.bunjang_clone.src.home.detail.buy.address.AddressActivityInterface
 import com.example.bunjang_clone.src.home.detail.buy.address.AddressFragment
 import com.example.bunjang_clone.src.home.detail.buy.address.AddressService
@@ -29,7 +31,7 @@ import java.text.DecimalFormat
 
 class DeliveryBuyActivity() :
     BaseActivity<ActivityDeliveryBuyBinding>(ActivityDeliveryBuyBinding::inflate),
-    BuyActivityInterface {
+    BuyActivityInterface, AddressActivityInterface {
 
     var productIdx = 0
     var point = 0
@@ -49,7 +51,6 @@ class DeliveryBuyActivity() :
 
     var paymentStatus = false
 
-    lateinit var addressView: View
     lateinit var addressDialog: BottomSheetDialog
 
     private lateinit var items: BuyResult
@@ -66,6 +67,8 @@ class DeliveryBuyActivity() :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AddressService(this).getAddressData()
 
         getUserData()
 
@@ -129,27 +132,37 @@ class DeliveryBuyActivity() :
     }
 
     fun bottomAddAddress() {
-        addressView = layoutInflater.inflate(R.layout.dialog_address, null)
+        var addressView = layoutInflater.inflate(R.layout.dialog_address, null)
         addressDialog = BottomSheetDialog(this)
         addressDialog.setContentView(addressView)
 
         addressDialogAdapter = AddressDialogRvAdapter(this, dataList)
-
         addressDialogAdapter.setAddressItem(dataList)
 
-        binding.clProductWhere.setOnClickListener {
-            val addressDialogFragment = AddressFragment()
-            addressDialogFragment.show(supportFragmentManager, addressDialogFragment.tag)
+        var addressRv = addressView.findViewById<RecyclerView>(R.id.rv_dialog_my_address)
+        addressRv?.adapter = addressDialogAdapter
+
+        if (addressDialogAdapter.itemCount == 0) {
+            addressDialog.findViewById<RecyclerView>(R.id.rv_dialog_my_address)?.visibility = View.GONE
+            addressDialog.findViewById<LinearLayout>(R.id.ll_dialog_address_empty)?.visibility = View.VISIBLE
+        } else {
+            addressDialog.findViewById<RecyclerView>(R.id.rv_dialog_my_address)?.visibility = View.VISIBLE
+            addressDialog.findViewById<LinearLayout>(R.id.ll_dialog_address_empty)?.visibility = View.GONE
         }
 
+        binding.clProductWhere.setOnClickListener {
+            addressDialog.show()
+
+            addressDialog.findViewById<ImageView>(R.id.iv_dialog_address_add)?.setOnClickListener {
+                startActivity(Intent(this, AddAddressActivity::class.java))
+                addressDialog.dismiss()
+            }
+        }
         addressDialogAdapter.clickListener(object : AddressDialogRvAdapter.OnItemClickListener {
             override fun onClick(view: View, position: Int) {
-                binding.tvAddressRegister.visibility = View.VISIBLE
-                binding.clBuyBasic.visibility = View.GONE
-                binding.tvBuyerName.visibility = View.GONE
-                binding.tvBuyerPhoneNumber.visibility = View.GONE
-                binding.tvBuyerMainAddress.visibility = View.GONE
-                binding.tvBuyerSubAddress.visibility = View.GONE
+
+                binding.clAddressRegister.visibility = View.GONE
+                binding.clAddressMine.visibility = View.VISIBLE
 
                 binding.tvBuyerName.text = addressDialogAdapter.itemList[position].name
                 binding.tvBuyerMainAddress.text = addressDialogAdapter.itemList[position].address
@@ -217,8 +230,6 @@ class DeliveryBuyActivity() :
 
     override fun onGetBuyDataSuccess(response: BuyResponse) {
         items = response.result
-
-        Log.d("commission", "$items")
 
         Glide.with(this)
             .load(items.productImgURL)
@@ -292,5 +303,23 @@ class DeliveryBuyActivity() :
     }
 
     override fun onUserDataFail(message: String) {
+    }
+
+    override fun onPostAddressSuccess(response: AddressResponse) {
+    }
+
+    override fun onPostAddressFail(message: String) {
+    }
+
+    override fun onGetAddressSuccess(response: GetAddressData) {
+        if (response.code == 1000) {
+            for (i in response.result.listIterator()){
+                dataList.add(AddressData(i.receiverName, i.receiverPhoneNum, i.address, i.detailAddress, false))
+            }
+            bottomAddAddress()
+        }
+    }
+
+    override fun onGetAddressFail(message: String) {
     }
 }

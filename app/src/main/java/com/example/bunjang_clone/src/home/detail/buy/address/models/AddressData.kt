@@ -4,5 +4,6 @@ data class AddressData(
     var name : String,
     var phoneNumber : String,
     var address : String,
-    var addressDetail : String
+    var addressDetail : String,
+    var isCheck : Boolean
 )

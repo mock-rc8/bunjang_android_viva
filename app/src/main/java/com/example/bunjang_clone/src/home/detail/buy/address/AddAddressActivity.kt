@@ -107,7 +107,7 @@ class AddAddressActivity() : BaseActivity<ActivityAddAddressBinding>(ActivityAdd
     override fun onGetAddressSuccess(response: GetAddressData) {
         if (response.code == 1000) {
             for (i in response.result.listIterator()){
-                dataList.add(AddressData(i.receiverName, i.receiverPhoneNum, i.address, i.detailAddress))
+                dataList.add(AddressData(i.receiverName, i.receiverPhoneNum, i.address, i.detailAddress, false))
             }
             addressRv()
         }
