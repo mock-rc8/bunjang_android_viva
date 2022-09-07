@@ -11,6 +11,7 @@ import com.example.bunjang_clone.databinding.ActivityAddAddressBinding
 import com.example.bunjang_clone.src.home.detail.buy.address.models.AddAddressData
 import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressData
 import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressResponse
+import com.example.bunjang_clone.src.home.detail.buy.address.models.GetAddressData
 import com.example.bunjang_clone.src.login.models.LoginData
 
 class AddAddressActivity() : BaseActivity<ActivityAddAddressBinding>(ActivityAddAddressBinding::inflate), AddressActivityInterface {
@@ -34,6 +35,8 @@ class AddAddressActivity() : BaseActivity<ActivityAddAddressBinding>(ActivityAdd
         putAddress()
 
         passAddress()
+
+        AddressService(this).getAddressData()
 
 
     }
@@ -99,6 +102,17 @@ class AddAddressActivity() : BaseActivity<ActivityAddAddressBinding>(ActivityAdd
     }
 
     override fun onPostAddressFail(message: String) {
-        TODO("Not yet implemented")
+    }
+
+    override fun onGetAddressSuccess(response: GetAddressData) {
+        if (response.code == 1000) {
+            for (i in response.result.listIterator()){
+                dataList.add(AddressData(i.receiverName, i.receiverPhoneNum, i.address, i.detailAddress))
+            }
+            addressRv()
+        }
+    }
+
+    override fun onGetAddressFail(message: String) {
     }
 }

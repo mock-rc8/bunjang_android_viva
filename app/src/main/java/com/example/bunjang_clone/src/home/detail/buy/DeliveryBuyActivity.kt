@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,13 +15,21 @@ import com.example.bunjang_clone.R
 import com.example.bunjang_clone.config.BaseActivity
 import com.example.bunjang_clone.databinding.ActivityDeliveryBuyBinding
 import com.example.bunjang_clone.src.MainActivity
+import com.example.bunjang_clone.src.home.detail.buy.address.AddressActivityInterface
 import com.example.bunjang_clone.src.home.detail.buy.address.AddressFragment
+import com.example.bunjang_clone.src.home.detail.buy.address.AddressService
+import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressData
+import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressDialogRvAdapter
+import com.example.bunjang_clone.src.home.detail.buy.address.models.AddressResponse
+import com.example.bunjang_clone.src.home.detail.buy.address.models.GetAddressData
 import com.example.bunjang_clone.src.home.detail.buy.models.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.text.DecimalFormat
 
 
-class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityDeliveryBuyBinding::inflate), BuyActivityInterface{
+class DeliveryBuyActivity() :
+    BaseActivity<ActivityDeliveryBuyBinding>(ActivityDeliveryBuyBinding::inflate),
+    BuyActivityInterface {
 
     var productIdx = 0
     var point = 0
@@ -32,20 +41,13 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
 
     // 배송지 요청사항
     var shippi = false
-    
+
     // 개인정보 동의
     var agree = false
 
     var myuser = 0
 
     var paymentStatus = false
-
-    var addressName = ""
-    var addressMain = ""
-    var addressSub = ""
-    var addressPhone = ""
-
-    var addressLoacation = false
 
     lateinit var addressView: View
     lateinit var addressDialog: BottomSheetDialog
@@ -56,6 +58,10 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
     private lateinit var shippingOptionDialog: BottomSheetDialog
     private lateinit var shippingAdapter: ShippingRvAdapter
 
+    private lateinit var addressDialogAdapter: AddressDialogRvAdapter
+
+    var dataList = ArrayList<AddressData>()
+
     val priceFormat = DecimalFormat("#,###")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +70,7 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
         getUserData()
 
         productIdx = intent.getIntExtra("productBuyIdx", 0)
-        Log.d("productid","$productIdx")
+        Log.d("productid", "$productIdx")
         getBuyData(productIdx)
 
         shippingDialog()
@@ -105,24 +111,57 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
             var transaction = "택배결제"
             var require = binding.tvBuyShippingOptions.text.toString()
             var point = binding.etBuyProductPoint.text.toString()
-            var paymentMe = if(!paymentStatus) "번개장터 간편결제" else "다른 결제수단"
+            var paymentMe = if (!paymentStatus) "번개장터 간편결제" else "다른 결제수단"
 
-            Log.d("btnProductBuy", "$myuser, $productIdx, $transaction,$point, $require, $finalPayment, $paymentMe, $commission")
-            postPaymentProduct(PaymentData(userIdx = myuser, productIdx = productIdx, transactionMethod = transaction, requirement = require,
-            commissionPrice = commission, usePoint = point.toInt(), finalPrice = finalPayment, paymentMethod = paymentMe))
+            Log.d("btnProductBuy",
+                "$myuser, $productIdx, $transaction,$point, $require, $finalPayment, $paymentMe, $commission")
+            postPaymentProduct(PaymentData(userIdx = myuser,
+                productIdx = productIdx,
+                transactionMethod = transaction,
+                requirement = require,
+                commissionPrice = commission,
+                usePoint = point.toInt(),
+                finalPrice = finalPayment,
+                paymentMethod = paymentMe))
         }
 
 
     }
+
     fun bottomAddAddress() {
-            addressView = layoutInflater.inflate(R.layout.dialog_address, null)
-            addressDialog = BottomSheetDialog(this)
-            addressDialog.setContentView(addressView)
+        addressView = layoutInflater.inflate(R.layout.dialog_address, null)
+        addressDialog = BottomSheetDialog(this)
+        addressDialog.setContentView(addressView)
+
+        addressDialogAdapter = AddressDialogRvAdapter(this, dataList)
+
+        addressDialogAdapter.setAddressItem(dataList)
 
         binding.clProductWhere.setOnClickListener {
             val addressDialogFragment = AddressFragment()
             addressDialogFragment.show(supportFragmentManager, addressDialogFragment.tag)
         }
+
+        addressDialogAdapter.clickListener(object : AddressDialogRvAdapter.OnItemClickListener {
+            override fun onClick(view: View, position: Int) {
+                binding.tvAddressRegister.visibility = View.VISIBLE
+                binding.clBuyBasic.visibility = View.GONE
+                binding.tvBuyerName.visibility = View.GONE
+                binding.tvBuyerPhoneNumber.visibility = View.GONE
+                binding.tvBuyerMainAddress.visibility = View.GONE
+                binding.tvBuyerSubAddress.visibility = View.GONE
+
+                binding.tvBuyerName.text = addressDialogAdapter.itemList[position].name
+                binding.tvBuyerMainAddress.text = addressDialogAdapter.itemList[position].address
+                binding.tvBuyerSubAddress.text = addressDialogAdapter.itemList[position].addressDetail
+                binding.tvBuyerPhoneNumber.text = addressDialogAdapter.itemList[position].phoneNumber
+
+                addressDialogAdapter.notifyDataSetChanged()
+                addressDialog.dismiss()
+
+            }
+
+        })
     }
 
 
@@ -179,7 +218,7 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
     override fun onGetBuyDataSuccess(response: BuyResponse) {
         items = response.result
 
-        Log.d("commission","$items")
+        Log.d("commission", "$items")
 
         Glide.with(this)
             .load(items.productImgURL)
@@ -217,7 +256,7 @@ class DeliveryBuyActivity() : BaseActivity<ActivityDeliveryBuyBinding>(ActivityD
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (binding.etBuyProductPoint.text.toString() =="") {
+                if (binding.etBuyProductPoint.text.toString() == "") {
                     point = 0
                     binding.tvBuyLightningPointPrice.text = "0원"
                 } else {

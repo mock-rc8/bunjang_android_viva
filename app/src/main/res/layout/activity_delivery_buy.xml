@@ -124,6 +124,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_buy_where">
 
                 <TextView
+                    android:id="@+id/tv_address_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
@@ -185,7 +186,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/cl_buy_basic" />
 
                 <TextView
-                    android:id="@+id/tv_buy_address1"
+                    android:id="@+id/tv_buyer_main_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -196,15 +197,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_buyer_name" />
 
                 <TextView
-                    android:id="@+id/tv_buy_address2"
+                    android:id="@+id/tv_buyer_sub_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="두번째 상세주소"
                     android:textSize="15sp"
                     android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="@id/tv_buy_address1"
-                    app:layout_constraintTop_toBottomOf="@id/tv_buy_address1" />
+                    app:layout_constraintStart_toStartOf="@id/tv_buyer_main_address"
+                    app:layout_constraintTop_toBottomOf="@id/tv_buyer_main_address" />
 
                 <TextView
                     android:id="@+id/tv_buyer_phone_number"
@@ -216,8 +217,8 @@
                     android:textSize="15sp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/tv_buy_address2"
-                    app:layout_constraintTop_toBottomOf="@id/tv_buy_address2" />
+                    app:layout_constraintStart_toStartOf="@id/tv_buyer_sub_address"
+                    app:layout_constraintTop_toBottomOf="@id/tv_buyer_sub_address" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
