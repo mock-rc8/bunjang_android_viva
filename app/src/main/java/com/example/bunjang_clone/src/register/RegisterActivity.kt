@@ -41,10 +41,10 @@ AreaFragment.OnDataArea, CategoryFragment.OnDataCategory{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var mainimg = "https://user-images.githubusercontent.com/96619472/187862924-6c25bd08-0095-4d87-86c7-1703f1472e76.jpg"
+        var mainimg = "https://user-images.githubusercontent.com/96619472/188822417-0165d8d4-7d49-4c46-8674-35f5384a403e.jpg"
         var subimglist = listOf(
-            "https://user-images.githubusercontent.com/96619472/187862934-7f418924-2c45-4c27-9d64-e73175c3164a.jpg",
-            "https://user-images.githubusercontent.com/96619472/187862951-cd4bbe9f-aecd-4a35-b9f2-ae626b17ea13.jpg"
+            "https://user-images.githubusercontent.com/96619472/188822426-a55d2cc1-4719-41f5-a7aa-b39371be841d.jpg",
+            "https://user-images.githubusercontent.com/96619472/188822428-6b63bd15-1fdc-476f-b1ef-60b2bbf39e18.jpg"
         )
 
         setRv()
@@ -107,7 +107,7 @@ AreaFragment.OnDataArea, CategoryFragment.OnDataCategory{
             var imageUrl = mainimg
             var subimgUrl = subimglist
             var mainCategory = mainCategory
-            var subCategory = "방송/예능/캐릭터"
+            var subCategory = "PC부품"
             var areaAddress = myArea
 
             Log.d("productRegister","$userId,$productName,$imageUrl,$subimgUrl,$areaAddress,$mainCategory, $subCategory, $hashtag," +
